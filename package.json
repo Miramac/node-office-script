@@ -11,14 +11,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Miramac/OfficeScript.git"
+    "url": "https://github.com/Miramac/node-office-script.git"
   },
   "author": "Fabian Roloff <fabian.roloff@vocatus.de>",
   "license": "GPL V2",
   "bugs": {
-    "url": "https://github.com/Miramac/OfficeScript/issues"
+    "url": "https://github.com/Miramac/node-office-script/issues"
   },
-  "homepage": "https://github.com/Miramac/OfficeScript",
+  "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {
     "edge": "^4.0.0",
     "lodash": "^3.10.1"
