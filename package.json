@@ -1,6 +1,6 @@
 {
   "name": "office-script",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Office Application scripting in node.js using [NetOffice](http://netoffice.codeplex.com/) and edge.js.",
   "main": "index.js",
   "directories": {
@@ -24,6 +24,7 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
+    "gulp": "^3.9.0",
     "mocha": "^2.3.4"
   }
 }
