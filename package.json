@@ -1,0 +1,29 @@
+{
+  "name": "office-script",
+  "version": "1.0.0",
+  "description": "Office Application scripting in node.js using [NetOffice](http://netoffice.codeplex.com/) and edge.js.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha ./test/mocha.*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Miramac/OfficeScript.git"
+  },
+  "author": "Fabian Roloff <fabian.roloff@vocatus.de>",
+  "license": "GPL V2",
+  "bugs": {
+    "url": "https://github.com/Miramac/OfficeScript/issues"
+  },
+  "homepage": "https://github.com/Miramac/OfficeScript",
+  "dependencies": {
+    "edge": "^4.0.0",
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
+}
