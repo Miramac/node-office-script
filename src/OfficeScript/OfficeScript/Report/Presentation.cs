@@ -109,6 +109,12 @@ namespace OfficeScript.Report
                 saveAs = (Func<object, Task<object>>)(
                     async (input) =>
                     {
+                        if (input is string)
+                        {
+                            var tmp = new Dictionary<string, object>();
+                            tmp.Add("name", input);
+                            input = tmp;
+                        }
                         this.SaveAs((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                         return null;
                     }
@@ -116,6 +122,12 @@ namespace OfficeScript.Report
                 saveAsCopy = (Func<object, Task<object>>)(
                     async (input) =>
                     {
+                        if (input is string)
+                        {
+                            var tmp = new Dictionary<string, object>();
+                            tmp.Add("name", input);
+                            input = tmp;
+                        }
                         this.SaveAsCopy((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                         return null;
                     }
@@ -130,12 +142,6 @@ namespace OfficeScript.Report
                 slides = (Func<object, Task<object>>)(
                     async (input) =>
                     {
-                        if (input is string)
-                        {
-                            var tmp = new Dictionary<string, object>();
-                            tmp.Add("tag:ctobjectdata.id", input); //remove
-                            input = tmp;
-                        }
                         input = (input == null) ? new Dictionary<string, object>() : input;
                         return this.Slides((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                     }
