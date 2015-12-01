@@ -37,24 +37,27 @@ PowerPoint application automation.
 Using sync presentation object
 ```javascript
     var path = require('path');
-    var Presentation = require('office-script').Presentation;
+    var Presentation = require('../').Presentation;
     
-    //open a new PPT Presentation 
+    //open a new PPT Presentation  
     var presentation = new Presentation(path.join(__dirname,'Presentation01.pptx'));
     
-    //get presentation slides 
+    //get presentation slides  
     var slides = presentation.slides();
     console.log('Slide count:', slides.length);
     
-    //Get only Shapes with name 'Title 1' on slide 1
+    //Get only Shapes with name 'Title 1' on slide 1 
     var shapes = presentation.shapes({'attr:Name':'Title 1'}, slides[0]);
-    console.log('Title shape text:', shapes[0].attr('Text', true);
+    console.log('Title shape text:', shapes[0].attr('Text', true));
     
-    //SaveAs new presentation and quit application
+    //Save presentation as PDF (sync)
+    presentation.saveAs({name:path.join(__dirname,'Presentation01.pdf'), type:'pdf'},true);
+    //SaveAs new presentation and quit application 
     presentation.saveAs(path.join(__dirname,'Presentation01_New.pptx'), function(err) {
         if (err) throw err;
         presentation.quit()
     });
+
 
 ```
 
