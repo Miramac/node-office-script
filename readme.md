@@ -37,7 +37,7 @@ PowerPoint application automation.
 Using sync presentation object
 ```javascript
     var path = require('path');
-    var Presentation = require('../').Presentation;
+    var Presentation = require('office-script').Presentation;
     
     //open a new PPT Presentation  
     var presentation = new Presentation(path.join(__dirname,'Presentation01.pptx'));
