@@ -1,6 +1,6 @@
 {
   "name": "office-script",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Office Application scripting in node.js using [NetOffice](http://netoffice.codeplex.com/) and edge.js.",
   "main": "index.js",
   "directories": {
@@ -13,11 +13,20 @@
     "type": "git",
     "url": "https://github.com/Miramac/node-office-script.git"
   },
-  "author": "Fabian Roloff <fabian.roloff@vocatus.de>",
+  "author": {
+    "name": "Fabian Roloff",
+    "email": "fabian.roloff@vocatus.de"
+  },
   "license": "GPL V2",
   "bugs": {
     "url": "https://github.com/Miramac/node-office-script/issues"
   },
+  "keywords": [ 
+      "OFfice",
+      "PowerPoint",
+      "PPT",
+      "PPTX"
+  ],
   "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {
     "edge": "^4.0.0",

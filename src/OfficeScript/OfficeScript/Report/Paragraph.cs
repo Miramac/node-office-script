@@ -48,6 +48,12 @@ namespace OfficeScript.Report
                attr = (Func<object, Task<object>>)(
                    async (input) =>
                    {
+                       if (input is string)
+                       {
+                           var tmp = new Dictionary<string, object>();
+                           tmp.Add("name", input);
+                           input = tmp;
+                       }
                        return Util.Attr(this, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value), Invoke);
                    }),
                remove = (Func<object, Task<object>>)(

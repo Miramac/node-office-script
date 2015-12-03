@@ -2,18 +2,32 @@ var path = require('path');
 var Presentation = require('../').Presentation
 
 var presentation = new Presentation(path.join(__dirname,'/data/Testpptx_00.pptx'));
-var slides = presentation.slides({"attr:Pos":'1'});
+// var slides = presentation.slides({"attr:Pos":'1'});
+// console.log('slides', slides.length);
+
+// var shapes = presentation.shapes({'tag:ctobjectdata.id':'FABI'}, slides);
+// console.log('shapes', shapes.length);
+// console.log('shapes', shapes[0].attr('Name',true));
+// console.log('shapes', shapes[0].attr('Left',true));
+// console.log('shapes', shapes[0].attr({name:'Left', value:10},true));
+// console.log('shapes', shapes[0].attr('Left',true));
+
+
+//get the Slide 
+var slides = presentation.slides();
 console.log('slides', slides.length);
 
-var shapes = presentation.shapes({'tag:ctobjectdata.id':'FABI'}, slides);
-console.log('shapes', shapes.length);
+console.log( presentation.attr('Name', true))
 
-console.log('shapes', shapes[0].attr('Left',true));
-console.log('shapes', shapes[0].attr({name:'Left', value:10},true));
-console.log('shapes', shapes[0].attr('Left',true));
+var shapes = presentation.shapes({'attr:Name':'Title 1'});
 
+console.log( shapes[0].attr('Text', true))
+// console.log('shapes', shapes[0].attr('Rotation', true));
 
-setTimeout(presentation.quit, 500);
+// shapes[0].attr({name:'Rotation',value:200}, true)
+attr = presentation.tags(null, true)
+console.log(attr);
+ setTimeout(presentation.quit, 500);
 
 
 /*
