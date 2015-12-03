@@ -2,17 +2,32 @@ var path = require('path');
 var Presentation = require('../').Presentation
 
 var presentation = new Presentation(path.join(__dirname,'/data/Testpptx_00.pptx'));
+
+var slides = presentation.slides();
+
+//console.log('slides.length', slides.length);
+
+console.log(' slides[0].pos()', slides[0].pos());
+
+
+
+console.log(' slides[0].pos()', slides[0].pos(2).pos());
+
+
 // var slides = presentation.slides({"attr:Pos":'1'});
 // console.log('slides', slides.length);
 
-// var shapes = presentation.shapes({'tag:ctobjectdata.id':'FABI'}, slides);
+ var shapes = presentation.shapes({'tag:ctobjectdata.id':'chart1'});
+ console.log('shapes', shapes.length);
+  setTimeout(presentation.quit, 500);
+  
 // console.log('shapes', shapes.length);
 // console.log('shapes', shapes[0].attr('Name',true));
 // console.log('shapes', shapes[0].attr('Left',true));
 // console.log('shapes', shapes[0].attr({name:'Left', value:10},true));
 // console.log('shapes', shapes[0].attr('Left',true));
 
-
+/*
 //get the Slide 
 var slides = presentation.slides();
 console.log('slides', slides.length);
