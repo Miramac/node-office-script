@@ -1,6 +1,13 @@
 # OfficeScript
 
+*Early alpha stage...*
+
 Scripting MS Office application with node.js using [NetOffice](http://netoffice.codeplex.com/) and edge.js.
+
+## Install
+```sh
+npm install office-script --save
+```
 
 ## PowerPoint
 
@@ -109,4 +116,3 @@ console.log("Shape text set to 'FuBar")
 * Rotation  `Float`
 * Fill  `String`
 * AltText  `String`
-
