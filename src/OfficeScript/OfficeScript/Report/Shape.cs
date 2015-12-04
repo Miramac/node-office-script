@@ -56,7 +56,7 @@ namespace OfficeScript.Report
                     {
                         return this.Duplicate();
                     }),
-                paragraph = (Func<object, Task<object>>)(
+                paragraphs = (Func<object, Task<object>>)(
                     async (input) =>
                     {
                         input = (input == null) ? new Dictionary<string, object>() : input;
@@ -66,7 +66,7 @@ namespace OfficeScript.Report
                     async (input) =>
                     {
                         this.TextReplace((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
-                        return null;
+                        return this.Invoke();
                     }),
                 exportAs = (Func<object, Task<object>>)(
                     async (input) =>
