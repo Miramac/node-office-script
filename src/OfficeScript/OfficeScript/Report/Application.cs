@@ -81,6 +81,11 @@ namespace OfficeScript.Report
                     {
                         return this.Open((string)input).Invoke();
                     }),
+                fetch = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return this.Fetch((string)input).Invoke();
+                    }),
                 quit = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -121,6 +126,41 @@ namespace OfficeScript.Report
             this.application.Visible = NetOffice.OfficeApi.Enums.MsoTriState.msoTrue;
             name = name.Replace('/', '\\');
             return new Presentation(this.application.Presentations.Open(name));
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public Presentation Fetch(string name)
+        {
+            //try to get the active PPT Instance
+            this.application = PowerPoint.Application.GetActiveInstance();
+            if (this.application == null)
+            {
+                //start PPT if ther is no active instance
+                throw new Exception("Missing PowerPoint Application");
+            }
+            this.application.Visible = NetOffice.OfficeApi.Enums.MsoTriState.msoTrue;
+            Presentation presentation = null;
+            if (name != null)
+            {
+                try
+                {
+                    presentation = new Presentation(this.application.Presentations[name]);
+                }catch
+                {  
+                    throw new Exception("Cannot find the PowerPoint presentations");
+                }
+            }
+            else
+            {
+                presentation = new Presentation(this.application.ActivePresentation);
+
+            }
+            
+            return presentation;
         }
 
         /// <summary>
