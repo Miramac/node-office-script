@@ -73,6 +73,12 @@ namespace OfficeScript.Report
                         input = (input == null) ? new Dictionary<string,object>() :  input;
                         return this.AddTextbox((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                     }),
+                addPicture = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        input = (input == null) ? new Dictionary<string, object>() : input;
+                        return this.AddPicture((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
+                    }),
                 getType = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -201,14 +207,53 @@ namespace OfficeScript.Report
                     default:
                         orientation = NetOffice.OfficeApi.Enums.MsoTextOrientation.msoTextOrientationHorizontal;
                         break;
-
                 }
             }
 
-
-
             return new Shape(this.slide.Shapes.AddTextbox(orientation, left, top, width, height)).Invoke();
         }
+
+        /// <summary>
+        /// Adds an empty textbox on the given slide
+        /// </summary>
+        /// <param name="slide"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
+        public object AddPicture(IDictionary<string, object> parameters)
+        {
+            object tmpObject;
+            float tmpFloat;
+
+            float left = 0;
+            float top = 0;
+            String path = "";
+
+            if (parameters.TryGetValue("left", out tmpObject))
+            {
+                if (float.TryParse(tmpObject.ToString(), out tmpFloat))
+                {
+                    left = tmpFloat;
+                }
+            }
+            if (parameters.TryGetValue("top", out tmpObject))
+            {
+                if (float.TryParse(tmpObject.ToString(), out tmpFloat))
+                {
+                    top = tmpFloat;
+                }
+            }
+            if (parameters.TryGetValue("path", out tmpObject))
+            {
+                path = tmpObject.ToString();
+
+                if (!System.IO.File.Exists(path))
+                {
+                    throw new Exception("Missing file!");
+                }
+            }
+            return new Shape(this.slide.Shapes.AddPicture(path, NetOffice.OfficeApi.Enums.MsoTriState.msoFalse, NetOffice.OfficeApi.Enums.MsoTriState.msoTrue, left, top)).Invoke();
+        }
+
 
 
         internal bool TestFilter(IDictionary<string, object> filter)

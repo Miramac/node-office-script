@@ -85,14 +85,17 @@ namespace OfficeScript.Report
             set
             {
                 string text = value;
-                while (this.shape.TextFrame.TextRange.Paragraphs().Count < this.start - 1)
+                int i;
+
+                for (i = this.shape.TextFrame.TextRange.Paragraphs().Count; i < this.start; i++)
                 {
                     this.shape.TextFrame.TextRange.Paragraphs(this.shape.TextFrame.TextRange.Paragraphs().Count).InsertAfter(Environment.NewLine);
                 }
-                if (this.shape.TextFrame.TextRange.Paragraphs().Count < this.start)
-                {
-                    text = Environment.NewLine + text;
-                }
+
+                //if (this.shape.TextFrame.TextRange.Paragraphs().Count < this.start)
+                //{
+                    //text = Environment.NewLine + text;
+                //}
                 this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Text = text;
             }
         }
@@ -101,7 +104,7 @@ namespace OfficeScript.Report
         {
             get
             {
-                return this.shape.TextFrame.TextRange.Paragraphs(this.start,this.length).Count;
+                return this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Lines().Count;
             }
         }
         

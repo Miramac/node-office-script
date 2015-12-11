@@ -6,12 +6,12 @@ var testPPT01 = 'Testpptx_01.pptx';
 var testDataPath = path.join(__dirname, 'data');
 
 
-describe('report', function(){
+describe('report', function() {
     this.timeout(15000);
     after( function(done) {powerpoint.quit(null, done);} );
-    describe('presentation', function(){
-        describe('#open&close', function(){
-            it('should open and close the file', function(done){
+    describe('presentation', function() {
+        describe('#open&close', function() {
+            it('should open and close the file', function(done) {
                 powerpoint.open( path.join(testDataPath,testPPT01), function(err, presentation) {
                     if(err) throw err;
                     presentation.close(null, done);
@@ -19,7 +19,7 @@ describe('report', function(){
             });
         });
         describe('#attr', function(){
-            it('should get a name and path attribute from presentation', function(done){
+            it('should get a name and path attribute from presentation', function(done) {
                 powerpoint.open( path.join(testDataPath,testPPT01), function(err, presentation) {
                     if(err) throw err;
                     //get Path Sync
