@@ -43,7 +43,7 @@ PowerPoint application automation.
 # sync vs. async
 Office-Script is written in an async pattern, but application automation has serious problems with async... 
 
-Because of this, I recommend to use the sync presentation wrapper. Also it has more readable API. 
+Because of this, I recommend to use the sync presentation wrapper. It also has the more readable API. 
 
 ```javascript
     var path = require('path');
