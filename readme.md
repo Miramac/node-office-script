@@ -9,7 +9,7 @@ Scripting MS Office application with node.js using [NetOffice](http://netoffice.
 npm install office-script --save
 ```
 
-## PowerPoint
+# PowerPoint
 
 PowerPoint application automation. 
 ```javascript
@@ -40,8 +40,10 @@ PowerPoint application automation.
         });
     });
 ```
+# sync vs. async
+Office-Script is written in an async patter, but application automation has serious problems with async...
+Because of this, we recoment to use the sync presentation wrapper. Also it has more readable API. 
 
-Using sync presentation object
 ```javascript
     var path = require('path');
     var Presentation = require('office-script').Presentation;
@@ -53,66 +55,66 @@ Using sync presentation object
     var slides = presentation.slides();
     console.log('Slide count:', slides.length);
     
-    //Get only Shapes with name 'Title 1' on slide 1 
-    var shapes = presentation.shapes({'attr:Name':'Title 1'}, slides[0]);
-    console.log('Title shape text:', shapes[0].attr('Text', true));
+    //Get all shapes of the first slide 1 
+    var shapes = slides[0].shapes();
+    console.log('Title shape count:', shapes.length);
     
+    //get name and text of the first shape
+    console.log('shape name:', shapes[0].name());
+    console.log('Title shape count:', shapes[0].text());
+    
+    //change name of the first
+    shapes[0].name('First Shape');
+    shapes[0].text('FuBar');
+    
+    //Setter retun the destination object so you can chain them
+    shapes[0].top(10).left(10).height(100).width(100);
+      
     //Save presentation as PDF (sync)
-    presentation.saveAs({name:path.join(__dirname,'Presentation01.pdf'), type:'pdf'},true);
+    presentation.saveAs({name:path.join(__dirname,'Presentation01.pdf'), type:'pdf'});
     //SaveAs new presentation and quit application 
-    presentation.saveAs(path.join(__dirname,'Presentation01_New.pptx'), function(err) {
-        if (err) throw err;
-        presentation.quit()
-    });
+    presentation.saveAs(path.join(__dirname,'Presentation01_New.pptx'));
+    presentation.quit(); //Close presentation & quit application  
 
 
 ```
+# Synchronous API
+## Presentation([path]);
+If path exists the presentation will be open. If `path` not exists, an allready open presentation with the name of `path` will be ussed. If `path` is missing or `null`, the active presentation is ussed.
+### Property methods 
+* .name() `String readonly` Presentation name
+* .path() `String readonly` Presentation path
+* .fullName() `String readonly` Presentation path with presentation name
 
-### .slides([selector])
+### presentation methods
+* .addSlide([pos]) *returns Slide*
+
+## presentation.slides([selector])
 Get presentation slides. Optional filterd by the selector.
+### Property methods
+If `value` is set, is set the property and return the slide
+* .name([value]) `String` 
+* .pos([value] `Int`
+* .number([value])  `Int readonly`
 
-### .shapes([selector] [,context])
+### Slide methods
+* .remove()
+* .addTextbox(options) *returns Shape*
+* .addPicture(options) *returns Shape*
+
+
+## presentation.shapes([selector] [, context])
 Get presentation shapes. Optional filterd by the selector. Context is an optional slides array.
-
-### .attr(params, callback)
-If callback is `true`, it's a sync function and return the current object for chaining
-* Getter
-
-```javascript
-presentation.attr('Path', function(pptPat) {
-    console.log(pptPat)
-})
-//or sync
-var pptPath = presentation.attr('Path', true)
-console.log(pptPat)
-```
-* Setter
-
-```javascript
-shape.attr({name:'Text', value:'FuBar'}, function() {
-    console.log("Shape text set to 'FuBar")
-})
-//or sync
-shape.attr({name:'Text', value:'FuBar'}, true)
-console.log("Shape text set to 'FuBar")
-```
-#### Presentation properties
-* Name `String readonly`
-* Path `String readonly`
-* FullName `String readonly`
-
-#### Slide properties
-* Name `String`
-* Pos `Int`
-* Number  `Int readonly`
-
-#### Shape properties
-* Name `String`
-* Text `String`
-* Top  `Float`
-* Left  `Float`
-* Height  `Float`
-* Width  `Float`
-* Rotation  `Float`
-* Fill  `String`
-* AltText  `String`
+## slide.shapes([selector])
+Get slide shapes. Optional filterd by the selector. Context is an optional slides array.
+### Property methods
+If `value` is set, is set the property and return the shape
+* .name([value]) `String`
+* .text([value]) `String`
+* .top([value])  `Float`
+* .left([value])  `Float`
+* .height([value])  `Float`
+* .width([value])  `Float`
+* .rotation([value])  `Float`
+* .fill([value])  `String`
+* .altText([value])  `String`
