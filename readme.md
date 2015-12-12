@@ -41,8 +41,9 @@ PowerPoint application automation.
     });
 ```
 # sync vs. async
-Office-Script is written in an async patter, but application automation has serious problems with async...
-Because of this, we recoment to use the sync presentation wrapper. Also it has more readable API. 
+Office-Script is written in an async pattern, but application automation has serious problems with async... 
+
+Because of this, I recommend to use the sync presentation wrapper. Also it has more readable API. 
 
 ```javascript
     var path = require('path');
@@ -80,7 +81,9 @@ Because of this, we recoment to use the sync presentation wrapper. Also it has m
 ```
 # Synchronous API
 ## Presentation([path]);
-If path exists the presentation will be open. If `path` not exists, an allready open presentation with the name of `path` will be ussed. If `path` is missing or `null`, the active presentation is ussed.
+If path exists the presentation will be open. 
+If `path` not exists, an allready open presentation with the name of `path` will be used. 
+If `path` is missing or `null`, the active presentation is used.
 ### Property methods 
 * .name() `String readonly` Presentation name
 * .path() `String readonly` Presentation path
