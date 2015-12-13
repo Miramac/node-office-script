@@ -56,7 +56,7 @@ Because of this, I recommend to use the sync presentation wrapper. It also has t
     var slides = presentation.slides();
     console.log('Slide count:', slides.length);
     
-    //Get all shapes of the first slide 1 
+    //Get all shapes of the first slide 
     var shapes = slides[0].shapes();
     console.log('Title shape count:', shapes.length);
     
@@ -95,7 +95,7 @@ If `path` is missing or `null`, the active presentation is used.
 ## presentation.slides([selector])
 Get presentation slides. Optional filterd by the selector.
 ### Property methods
-If `value` is set, is set the property and return the slide
+If `value` is provided, it will set the property and return the slide
 * .name([value]) `String` 
 * .pos([value] `Int`
 * .number([value])  `Int readonly`
@@ -111,7 +111,7 @@ Get presentation shapes. Optional filterd by the selector. Context is an optiona
 ## slide.shapes([selector])
 Get slide shapes. Optional filterd by the selector. Context is an optional slides array.
 ### Property methods
-If `value` is set, is set the property and return the shape
+If `value` is provided, it will set the property and return the shape
 * .name([value]) `String`
 * .text([value]) `String`
 * .top([value])  `Float`
