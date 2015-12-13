@@ -3,23 +3,41 @@ var Presentation = require('../').Presentation
 
 var presentation = new Presentation(path.join(__dirname,'/data/Testpptx_00.pptx'));
 
-var slides = presentation.slides();
 
-//console.log('slides.length', slides.length);
+    
+    //get presentation slides  
+    var slides = presentation.slides();
+    console.log('Slide count:', slides.length);
+    
+    
+    //Get all shapes of the first slide 1 
+    var shapes = slides[0].shapes();
+    console.log('Title shape count:', shapes.length);
+    
+    //get name and text of the first shape
+    var shape =  shapes[0];
+     console.log('Title shape count:', shape.text());
+     shape.tag.set('FU', 'bar')
+    console.log('tag:', shape.tag.get('fu'));
+    shape.tag.remove('FU')
+   console.log('allTags:', shape.tags);
+    
+    
+    
+    //change name of the first
+    // shape.name('First Shape');
+    // shape.text('FuBar');
+        console.log(shape.name(), shape.text());
+    //Setter retun the destination object so you can chain them
+  //  shape.top(10).left(10).height(100).width(200);
+      
+    
+    // //Save presentation as PDF (sync)
+    // presentation.saveAs({name:path.join(__dirname,'Presentation01.pdf'), type:'pdf'});
+    // //SaveAs new presentation and quit application 
+   // presentation.saveAs(path.join(__dirname,'Presentation01_New.pptx'));
+   presentation.quit(); //Close presentation & quit application  
 
-console.log(' slides[0].pos()', slides[0].pos());
-
-
-
-console.log(' slides[0].pos()', slides[0].pos(2).pos());
-
-
-// var slides = presentation.slides({"attr:Pos":'1'});
-// console.log('slides', slides.length);
-
- var shapes = presentation.shapes({'tag:ctobjectdata.id':'chart1'});
- console.log('shapes', shapes.length);
-  setTimeout(presentation.quit, 500);
   
 // console.log('shapes', shapes.length);
 // console.log('shapes', shapes[0].attr('Name',true));
