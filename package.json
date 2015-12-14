@@ -1,7 +1,7 @@
 {
   "name": "office-script",
-  "version": "1.0.3",
-  "description": "Office Application scripting in node.js using [NetOffice](http://netoffice.codeplex.com/) and edge.js.",
+  "version": "1.0.4",
+  "description": "Scripting MS Office application with node.js using NetOffice and edge.js.",
   "main": "index.js",
   "directories": {
     "test": "test"
@@ -22,10 +22,9 @@
     "url": "https://github.com/Miramac/node-office-script/issues"
   },
   "keywords": [ 
-      "OFfice",
-      "PowerPoint",
-      "PPT",
-      "PPTX"
+      "office",
+      "presentation",
+      "powerpoint"
   ],
   "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {

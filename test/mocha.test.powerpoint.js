@@ -18,6 +18,16 @@ describe('report', function() {
                 });
             });
         });
+        describe('#fetch', function() {
+            it('should fetch an open presentation', function(done) {
+                powerpoint.open( path.join(testDataPath,testPPT01), function(err) {
+                    powerpoint.fetch(null,  function(err, presentation) {
+                        if(err) throw err;
+                        presentation.close(null, done);
+                    });
+                });
+            });
+        });
         describe('#attr', function(){
             it('should get a name and path attribute from presentation', function(done) {
                 powerpoint.open( path.join(testDataPath,testPPT01), function(err, presentation) {

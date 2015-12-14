@@ -146,11 +146,30 @@ namespace OfficeScript.Report
                         return this.Slides((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                     }
                 ),
-                getType = (Func<object, Task<object>>)(
+                addSlide = (Func<object, Task<object>>)(
                     async (input) =>
                     {
-                        return officeScriptType;
+                        if (input is string)
+                        {
+                            var tmp = new Dictionary<string, object>();
+                            tmp.Add("name", input);
+                            input = tmp;
+                        }
+                        if (input is int)
+                        {
+                            var tmp = new Dictionary<string, object>();
+                            tmp.Add("pos", input);
+                            input = tmp;
+                        }
+                        input = (input == null) ? new Dictionary<string, object>() : input;
+                        return this.AddSlide((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                     }
+                ),
+                getType = (Func<object, Task<object>>)(
+                async (input) =>
+                {
+                    return officeScriptType;
+                }
                 )
             };
         }
@@ -225,6 +244,50 @@ namespace OfficeScript.Report
             }
         }
         #endregion save
+
+        /// <summary>
+        /// Add a new Slide
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <returns></returns>
+        private object AddSlide(Dictionary<string, object> parameters)
+        {
+            var pos = this.presentation.Slides.Count + 1;
+            var layout = NetOffice.PowerPointApi.Enums.PpSlideLayout.ppLayoutBlank;
+            object tmpObject;
+            int tmpInt;
+
+            if (parameters.TryGetValue("pos", out tmpObject))
+            {
+                if (int.TryParse(tmpObject.ToString(), out tmpInt))
+                {
+                    pos = tmpInt;
+                }
+            }
+            if (parameters.TryGetValue("layout", out tmpObject))
+            {
+                switch(tmpObject.ToString().ToLower())
+                {
+                    case "blank":
+                            layout = NetOffice.PowerPointApi.Enums.PpSlideLayout.ppLayoutBlank;
+                            break;
+                    case "chart":
+                        layout = NetOffice.PowerPointApi.Enums.PpSlideLayout.ppLayoutChart;
+                        break;
+                    case "text":
+                        layout = NetOffice.PowerPointApi.Enums.PpSlideLayout.ppLayoutText;
+                        break;
+                    case "chartandtext":
+                        layout = NetOffice.PowerPointApi.Enums.PpSlideLayout.ppLayoutChartAndText;
+                        break;
+                    case "custom":
+                        layout = NetOffice.PowerPointApi.Enums.PpSlideLayout.ppLayoutCustom;
+                        break;
+                }
+            }
+            
+            return new Slide(this.presentation.Slides.Add(pos, layout)).Invoke();
+        }
 
         /// <summary>
         /// Init slide Array

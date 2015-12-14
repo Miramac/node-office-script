@@ -51,7 +51,7 @@ namespace OfficeScript.Report
                         this.Delete((string)input);
                         return this.Invoke();
                     }),
-                getAll = (Func<object, Task<object>>)(
+                all = (Func<object, Task<object>>)(
                     async (input) =>
                     {
                         return this.GetAll();

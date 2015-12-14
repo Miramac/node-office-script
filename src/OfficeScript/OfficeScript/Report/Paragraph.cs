@@ -61,8 +61,13 @@ namespace OfficeScript.Report
                    {
                        this.Remove();
                        return null;
-                   })
-           };
+                   }),
+                format = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return new Format(this).Invoke();
+                    })
+                };
         }
 
         /// <summary>
@@ -99,7 +104,9 @@ namespace OfficeScript.Report
                 this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Text = text;
             }
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         public int Count
         {
             get
@@ -107,6 +114,15 @@ namespace OfficeScript.Report
                 return this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Lines().Count;
             }
         }
-        
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public NetOffice.OfficeApi.TextRange2 GetUnderlyingObject()
+        {
+            return this.shape.TextFrame2.TextRange.Paragraphs(this.start, this.length);
+        }
+
     }
 }
