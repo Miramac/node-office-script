@@ -138,6 +138,13 @@ describe('report', function() {
                 assert.equal(presentation.slides()[2].shapes()[1].removeLine().paragraph().count(), 4);
                 presentation.close(done); 
             });
+            it('should be able to add a new picture', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var counter = presentation.slides()[2].shapes().length;
+                presentation.slides()[2].addPicture(path.join(testDataPath, 'ga.png'));
+                assert.equal(presentation.slides()[2].shapes().length, counter + 1);
+                presentation.close(done); 
+            });
             
         });
         describe('#paragraphs', function() {

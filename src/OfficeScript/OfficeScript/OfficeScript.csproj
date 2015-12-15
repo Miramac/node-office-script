@@ -70,6 +70,7 @@
     <Compile Include="Report\Format.cs" />
     <Compile Include="Report\Paragraph.cs" />
     <Compile Include="OfficeScriptType.cs" />
+    <Compile Include="DocumentProperty.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="Report\Application.cs" />
     <Compile Include="Report\Shape.cs" />

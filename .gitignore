@@ -56,3 +56,6 @@ packages/
 *.VisualState.xml
 TestResult.xml
 
+test/dest
+
+
