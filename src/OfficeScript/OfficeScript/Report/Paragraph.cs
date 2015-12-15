@@ -66,8 +66,13 @@ namespace OfficeScript.Report
                     async (input) =>
                     {
                         return new Format(this).Invoke();
+                    }),
+                font = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return new Font(this).Invoke();
                     })
-                };
+            };
         }
 
         /// <summary>
