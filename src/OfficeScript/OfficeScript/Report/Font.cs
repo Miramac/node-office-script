@@ -21,11 +21,11 @@ namespace OfficeScript.Report
         public Font(Paragraph paragraph)
         {
             this.paragraph = paragraph;
-            this.font = this.paragraph.GetUnderlyingObject().Font;
         }
         
         public object Invoke()
         {
+            this.font = this.paragraph.GetUnderlyingObject().Font;
             return new
             {
                 attr = (Func<object, Task<object>>)(

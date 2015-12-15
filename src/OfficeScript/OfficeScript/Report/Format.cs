@@ -20,11 +20,11 @@ namespace OfficeScript.Report
         public Format(Paragraph paragraph)
         {
             this.paragraph = paragraph;
-            this.format = this.paragraph.GetUnderlyingObject().ParagraphFormat;
         }
 
         public object Invoke()
         {
+            this.format = this.paragraph.GetUnderlyingObject().ParagraphFormat;
             return new
             {
                 attr = (Func<object, Task<object>>)(
