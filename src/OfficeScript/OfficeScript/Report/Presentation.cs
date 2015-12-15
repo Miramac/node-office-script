@@ -16,10 +16,12 @@ namespace OfficeScript.Report
         private const OfficeScriptType officeScriptType = OfficeScriptType.Presentation;
         private bool closePresentation = true;
         private PowerPointTags tags;
+        private DocumentProperty properties;
         public Presentation(PowerPoint.Presentation presentation)
         {
             this.presentation = presentation;
             this.tags = new PowerPointTags(this.presentation);
+            this.properties = new DocumentProperty(this.presentation);
         }
 
         // Destruktor
@@ -99,6 +101,11 @@ namespace OfficeScript.Report
                     {
                         return this.tags.Invoke();
                     }),
+                properties = (Func<object, Task<object>>)(
+                async (input) =>
+                {
+                    return this.properties.Invoke();
+                }),
                 save = (Func<object, Task<object>>)(
                     async (input) =>
                     {
