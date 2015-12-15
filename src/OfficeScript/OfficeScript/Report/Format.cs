@@ -16,20 +16,12 @@ namespace OfficeScript.Report
         {
             this.format = format;
         }
+
         public Format(Paragraph paragraph)
         {
             this.paragraph = paragraph;
+            this.format = this.paragraph.GetUnderlyingObject().ParagraphFormat;
         }
-
-        private bool Init()
-        {
-            if (this.format == null && this.paragraph != null)
-            {
-                this.format = this.paragraph.GetUnderlyingObject().ParagraphFormat;
-            }
-            return true;
-        }
-
 
         public object Invoke()
         {
@@ -44,10 +36,9 @@ namespace OfficeScript.Report
                            tmp.Add("name", input);
                            input = tmp;
                        }
-                       return Util.Attr(this, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value), Invoke);
+                       return Util.Attr(this, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value), paragraph.Invoke);
                    }),
             };
-
       }
 
         /// <summary>
@@ -58,7 +49,6 @@ namespace OfficeScript.Report
         {
             get
             {
-                Init();
                 switch (this.format.Alignment)
                 {
                     case MsoParagraphAlignment.msoAlignLeft:
@@ -73,8 +63,6 @@ namespace OfficeScript.Report
             }
             set
             {
-
-                Init();
                 switch (value.ToLower())
                 {
                     case "left":
@@ -97,14 +85,10 @@ namespace OfficeScript.Report
         {
             get
             {
-
-                Init();
                 return (int)this.format.Bullet.Character;
             }
             set
             {
-
-                Init();
                 this.format.Bullet.Character = value;
             }
         }
@@ -116,14 +100,10 @@ namespace OfficeScript.Report
         {
             get
             {
-
-                Init();
                 return this.format.IndentLevel;
             }
             set
             {
-
-                Init();
                 this.format.IndentLevel = value;
             }
         }
@@ -133,7 +113,6 @@ namespace OfficeScript.Report
         /// </summary>
         internal NetOffice.OfficeApi.ParagraphFormat2 GetUnderlyingObject()
         {
-            Init();
             return this.format;
         }
 
@@ -141,7 +120,6 @@ namespace OfficeScript.Report
         //http://codereview/#3WF
         public void Copy(Format src)
         {
-            Init();
             NetOffice.OfficeApi.ParagraphFormat2 srcFormat = src.GetUnderlyingObject();
 
             //Bullets

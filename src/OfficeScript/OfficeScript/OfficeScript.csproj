@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Report\Font.cs" />
     <Compile Include="Report\Format.cs" />
     <Compile Include="Report\Paragraph.cs" />
     <Compile Include="OfficeScriptType.cs" />
