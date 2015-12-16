@@ -22,9 +22,13 @@ namespace OfficeScript.Report
             this.paragraph = paragraph;
         }
 
-        public object Invoke()
+        private void Init()
         {
             this.format = this.paragraph.GetUnderlyingObject().ParagraphFormat;
+        }
+
+        public object Invoke()
+        {
             return new
             {
                 attr = (Func<object, Task<object>>)(
@@ -36,6 +40,7 @@ namespace OfficeScript.Report
                            tmp.Add("name", input);
                            input = tmp;
                        }
+                       Init();
                        return Util.Attr(this, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value), paragraph.Invoke);
                    }),
             };
