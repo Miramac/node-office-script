@@ -84,8 +84,18 @@ namespace OfficeScript.Report
                     async (input) =>
                     {
                         return officeScriptType;
-                    }
-                )
+                    }),
+                getZindex = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return this.GetZindex();
+                    }),
+                setZindex = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.SetZindex((string)input);
+                        return this.Invoke();
+                    })
 
             };
         }
@@ -286,6 +296,35 @@ namespace OfficeScript.Report
             return new PowerPointTags(this.shape);
         }
 
+        public void SetZindex(string order)
+        {
+            switch (order.ToLower())
+            {
+                case "forward":
+                    this.shape.ZOrder(MsoZOrderCmd.msoBringForward);
+                    break;
+                case "backward":
+                    this.shape.ZOrder(MsoZOrderCmd.msoSendBackward);
+                    break;
+                case "front":
+                    this.shape.ZOrder(MsoZOrderCmd.msoBringToFront);
+                    break;
+                case "back":
+                    this.shape.ZOrder(MsoZOrderCmd.msoSendBackward);
+                    break;
+                case "beforetext":
+                    this.shape.ZOrder(MsoZOrderCmd.msoBringInFrontOfText);
+                    break;
+                case "behindtext":
+                    this.shape.ZOrder(MsoZOrderCmd.msoSendBehindText);
+                    break;
+            }
+        }
+
+        public int GetZindex()
+        {
+            return this.shape.ZOrderPosition;    
+        }
 
         #region Properties
 
