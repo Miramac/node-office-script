@@ -29,6 +29,38 @@ describe('report', function() {
                 presentation.close(done);
             });
         });
+         describe('#properties', function() {
+            it('should have 13 builtin properties', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var props = presentation.builtinProp();
+                var counter = 0, key;
+                for (key in props) {
+                    if(props.hasOwnProperty(key)) { 
+                        counter++;
+                    }
+                }
+                assert.equal(counter, 13); 
+                presentation.close(done);
+            });
+            it('should have and set builtin property "Last author"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                presentation.builtinProp('Last author', 'Oliver Queen');
+                assert.equal(presentation.builtinProp('Last author'), 'Oliver Queen'); 
+                presentation.close(done);
+            });
+            it('should have and set custom property', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                presentation.customProp('Hero', 'Green Arrow');
+                assert.equal(presentation.customProp('Hero'), 'Green Arrow'); 
+                presentation.close(done);
+            });
+            it('should set a tag', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                presentation.tag.set('Green', 'Arrow');
+                assert.equal(1, 1);
+                presentation.close(done);
+            });
+        });
         describe('#slides', function() {
             it('should have 3 slides', function(done) {
                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
@@ -36,14 +68,12 @@ describe('report', function() {
                 assert.equal(slides.length, 3);
                 presentation.close(done);
             });
-            
             it('should have the attribute "name"', function(done) {
                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
                 var slides = presentation.slides(); 
                 assert.equal(slides[1].name(), 'Slide2');
                 presentation.close(done);
             });
-            
             it('should have the attribute "pos"', function(done) {
                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
                 var slides = presentation.slides(); 
@@ -92,6 +122,41 @@ describe('report', function() {
                 assert.equal(shape.left(), 100);
                 assert.equal(shape.height(), 200);
                 assert.equal(shape.width(), 200);
+                presentation.close(done);
+            });
+            it('should be able to set and have a tag on slide1', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var slide = presentation.slides()[1];
+                slide.tag.set('Hero', 'Green Arrow');
+                slide = presentation.slides()[1];
+                assert.equal(slide.tag.get('Hero'), 'Green Arrow');
+                presentation.close(done);
+            });
+            it('should be able to set, have and remove a tag on slide1', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var slide = presentation.slides()[1];
+                slide.tag.set('Oliver Queen', 'Green Arrow');
+                slide.tag.set('Batman', 'Bruce Wayne');
+                slide.tag.set('Flash', 'Barry Allen');
+                slide = presentation.slides()[1];
+                var tags = slide.tags;
+                var counter = 0, key;
+                for (key in tags) {
+                    if(tags.hasOwnProperty(key)) { 
+                        counter++;
+                    }
+                }
+                assert.equal(counter, 3); 
+                slide.tag.remove('Flash');
+                slide = presentation.slides()[1];
+                tags = slide.tags;
+                counter = 0, key;
+                for (key in tags) {
+                    if(tags.hasOwnProperty(key)) { 
+                        counter++;
+                    }
+                }
+                assert.equal(counter, 2); 
                 presentation.close(done);
             });
         });
@@ -145,7 +210,41 @@ describe('report', function() {
                 assert.equal(presentation.slides()[2].shapes().length, counter + 1);
                 presentation.close(done); 
             });
-            
+            it('should be able to set and have a tag', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var shape = presentation.slides()[2].shapes()[1];
+                shape.tag.set('Hero', 'Green Arrow');
+                shape = presentation.slides()[2].shapes()[1];
+                assert.equal(shape.tag.get('Hero'), 'Green Arrow');
+                presentation.close(done);
+            });
+            it('should be able to set, have and remove a tag', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var shape = presentation.slides()[2].shapes()[1];
+                shape.tag.set('Oliver Queen', 'Green Arrow');
+                shape.tag.set('Batman', 'Bruce Wayne');
+                shape.tag.set('Flash', 'Barry Allen');
+                shape = presentation.slides()[2].shapes()[1];
+                var tags = shape.tags;
+                var counter = 0, key;
+                for (key in tags) {
+                    if(tags.hasOwnProperty(key)) { 
+                        counter++;
+                    }
+                }
+                assert.equal(counter, 14); 
+                shape.tag.remove('Flash');
+                shape = presentation.slides()[2].shapes()[1];
+                tags = shape.tags;
+                counter = 0, key;
+                for (key in tags) {
+                    if(tags.hasOwnProperty(key)) { 
+                        counter++;
+                    }
+                }
+                assert.equal(counter, 13); 
+                presentation.close(done);
+            });
         });
         describe('#paragraphs', function() {
             it('should have the attribute "text"', function(done) {
