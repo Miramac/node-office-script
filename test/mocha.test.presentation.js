@@ -165,6 +165,90 @@ describe('report', function() {
                 assert.equal(presentation.slides()[2].shapes()[1].addLine('yay').addLine('yay').paragraph().count(), 3);
                 presentation.close(done);
             });
+            it('should have the attribute "fontName"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontName(), 'Calibri');
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "fontName"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontName('Arial').fontName(), 'Arial');
+                presentation.close(done);   
+            });
+            it('should have the attribute "fontColor"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontColor(), '#000000');
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "fontColor"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontColor('#FF0000').fontColor(), '#ff0000');
+                presentation.close(done);   
+            });
+            it('should have the attribute "fontItalic"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontItalic(), false);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "fontItalic"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontItalic(true).fontItalic(), true);
+                presentation.close(done);   
+            });
+            it('should have the attribute "fontBold"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontBold(), false);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "fontBold"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.fontBold(true).fontBold(), true);
+                presentation.close(done);   
+            });
+            it('should have the attribute "align"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.align(), 'center');
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "align"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.align('left').align(), 'left');
+                presentation.close(done);   
+            });
+            it('should have the attribute "bullet"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.bullet(), 8226);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "bullet"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[0].shapes()[0].paragraph(1);
+                assert.equal(para.bullet(8224).bullet(), 8224);
+                presentation.close(done);   
+            });
+            it('should have the attribute "indent"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[2].shapes()[1].paragraph();
+                assert.equal(para.indent(), 1);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "indent"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var para = presentation.slides()[2].shapes()[1].paragraph();
+                assert.equal(para.indent(2).indent(), 2);
+                presentation.close(done);   
+            });
         });    
     });
 });
