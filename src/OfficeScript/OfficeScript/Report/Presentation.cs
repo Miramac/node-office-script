@@ -173,10 +173,16 @@ namespace OfficeScript.Report
                     }
                 ),
                 getType = (Func<object, Task<object>>)(
-                async (input) =>
-                {
-                    return officeScriptType;
-                }
+                    async (input) =>
+                    {
+                        return officeScriptType;
+                    }
+                ),
+                getSelectedShape = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return this.GetSelectedShape();
+                    }
                 )
             };
         }
@@ -317,6 +323,17 @@ namespace OfficeScript.Report
 
             return slides.ToArray();
         }
+
+        private object GetSelectedShape()
+        {
+            var selection = this.presentation.Application.ActiveWindow.Selection;
+            if (selection.Type == PowerPoint.Enums.PpSelectionType.ppSelectionShapes)
+            {
+                return new Shape(selection.ShapeRange[1]).Invoke();
+            }
+            return null;
+        }
+
 
         /// <summary>
         /// 
