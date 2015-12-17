@@ -176,6 +176,57 @@ describe('report', function() {
                 assert.equal(presentation.slides()[0].shapes()[0].name('Test').name(), 'Test');
                 presentation.close(done);   
             });
+            it('should have the attribute "top"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].top(), 195.33204650878906);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "top"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath,testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].top(10.5).top(), 10.5);
+                presentation.close(done);   
+            });
+            it('should have the attribute "left"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].left(), 54);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "left"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath,testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].left(10.5).left(), 10.5);
+                presentation.close(done);   
+            });
+            it('should have the attribute "height"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].height(), 60.585906982421875);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "height"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath,testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].height(10.5).height(), 10.5);
+                presentation.close(done);   
+            });
+            it('should have the attribute "width"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].width(), 612);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "width"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath,testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].width(10.5).width(), 10.5);
+                presentation.close(done);   
+            });
+            it('should have the attribute "rotation"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].rotation(), 0);
+                presentation.close(done);   
+            });
+            it('should be able to change the attribute "rotation"', function(done) {
+                var presentation = new Presentation(path.join(testDataPath,testPPT01));
+                assert.equal(presentation.slides()[0].shapes()[0].rotation(10.5).rotation(), 10.5);
+                presentation.close(done);   
+            });
+            
             it('should be able to duplicate shape1', function(done) {
                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
                 var shapes = presentation.slides()[0].shapes();
