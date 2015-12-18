@@ -56,6 +56,9 @@ packages/
 *.VisualState.xml
 TestResult.xml
 
+#VSCode config
+.vscode
+
+dist/
 test/dest
 
-.vscode
