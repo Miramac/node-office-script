@@ -86,7 +86,7 @@ namespace OfficeScript.Report
         /// <summary>
         /// Get or Set the Bullet-Property for this element.
         /// </summary>
-        public int Bullet
+        public int BulletCharacter
         {
             get
             {
@@ -95,6 +95,174 @@ namespace OfficeScript.Report
             set
             {
                 this.format.Bullet.Character = value;
+            }
+        }
+        
+        public String BulletFontName
+        {
+            get
+            {
+                return (String)this.format.Bullet.Font.Name;
+            }
+            set
+            {
+                this.format.Bullet.Font.Name = value;
+            }
+        }
+        
+        public MsoTriState BulletFontBold
+        {
+            get
+            {
+                return (MsoTriState)this.format.Bullet.Font.Bold;
+            }
+            set
+            {
+                this.format.Bullet.Font.Bold = value;
+            }
+        }
+        
+        public int BulletFontSize
+        {
+            get
+            {
+                return (int)this.format.Bullet.Font.Size;
+            }
+            set
+            {
+                this.format.Bullet.Font.Size = value;
+            }
+        }
+        
+        public NetOffice.OfficeApi.ColorFormat BulletFontColor
+        {
+            get
+            {
+                return (NetOffice.OfficeApi.ColorFormat)this.format.Bullet.Font.Fill.ForeColor;
+            }
+            set
+            {
+                this.format.Bullet.Font.Fill.ForeColor = value;
+            }
+        }
+        
+        public float BulletRelativeSize
+        {
+            get
+            {
+                return (float)this.format.Bullet.RelativeSize;
+            }
+            set
+            {
+                this.format.Bullet.RelativeSize = value;
+            }
+        }
+        
+        public MsoTriState BulletVisible
+        {
+            get
+            {
+                return (MsoTriState)this.format.Bullet.Visible;
+            }
+            set
+            {
+                this.format.Bullet.Visible = value;
+            }
+        }
+        
+        public float FirstLineIndent
+        {
+            get
+            {
+                return (float)this.format.FirstLineIndent;
+            }
+            set
+            {
+                this.format.FirstLineIndent = value;
+            }
+        }
+        
+        public float LeftIndent
+        {
+            get
+            {
+                return (float)this.format.LeftIndent;
+            }
+            set
+            {
+                this.format.LeftIndent = value;
+            }
+        }
+        
+        public MsoTriState HangingPunctuation
+        {
+            get
+            {
+                return (MsoTriState)this.format.HangingPunctuation;
+            }
+            set
+            {
+                this.format.HangingPunctuation = value;
+            }
+        }
+        
+        public MsoTriState LineRuleBefore
+        {
+            get
+            {
+                return (MsoTriState)this.format.LineRuleBefore;
+            }
+            set
+            {
+                this.format.LineRuleBefore = value;
+            }
+        }
+        
+        public MsoTriState LineRuleAfter
+        {
+            get
+            {
+                return (MsoTriState)this.format.LineRuleAfter;
+            }
+            set
+            {
+                this.format.LineRuleAfter = value;
+            }
+        }
+        
+        public MsoTriState SpaceBefore
+        {
+            get
+            {
+                return (MsoTriState)this.format.LineRuleAfter;
+            }
+            set
+            {
+                this.format.LineRuleAfter = value;
+            }
+        }
+        
+        public MsoTriState SpaceAfter
+        {
+            get
+            {
+                return (MsoTriState)this.format.SpaceAfter;
+            }
+            set
+            {
+                this.format.LineRuleAfter = value;
+            }
+        }
+        
+        public float SpaceWithin
+        {
+            get
+            {
+                return (float)this.format.SpaceWithin;
+            }
+            set
+            {
+                this.format.SpaceWithin = value;
             }
         }
 
@@ -121,6 +289,7 @@ namespace OfficeScript.Report
             return this.format;
         }
 
+         
 
         //http://codereview/#3WF
         public void Copy(Format src)

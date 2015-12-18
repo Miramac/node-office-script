@@ -183,6 +183,12 @@ namespace OfficeScript.Report
                     {
                         return this.GetSelectedShape();
                     }
+                ),
+                getActiveSlide = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return this.GetActiveSlide();
+                    }
                 )
             };
         }
@@ -334,6 +340,11 @@ namespace OfficeScript.Report
             return null;
         }
 
+
+        private object GetActiveSlide()
+        {
+            return new Slide(this.presentation.Application.ActiveWindow.Selection.SlideRange[1]).Invoke();
+        }
 
         /// <summary>
         /// 
