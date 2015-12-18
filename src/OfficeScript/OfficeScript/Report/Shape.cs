@@ -357,7 +357,7 @@ namespace OfficeScript.Report
         /// <summary>
         /// Get or Set the Top-Property for this element.
         /// </summary>
-        public float Top
+        public double Top
         {
             get
             {
@@ -365,13 +365,13 @@ namespace OfficeScript.Report
             }
             set
             {
-                this.shape.Top = value;
+                this.shape.Top = (float)value;
             }
         }
         /// <summary>
         /// Get or Set the Left-Property for this element.
         /// </summary>
-        public float Left
+        public double Left
         {
             get
             {
@@ -379,13 +379,13 @@ namespace OfficeScript.Report
             }
             set
             {
-                this.shape.Left = value;
+                this.shape.Left = (float)value;
             }
         }
         /// <summary>
         /// Get or Set the Height-Property for this element.
         /// </summary>
-        public float Height
+        public double Height
         {
             get
             {
@@ -393,13 +393,13 @@ namespace OfficeScript.Report
             }
             set
             {
-                this.shape.Height = value;
+                this.shape.Height = (float)value;
             }
         }
         /// <summary>
         /// Get or Set the Width-Property for this element.
         /// </summary>
-        public float Width
+        public double Width
         {
             get
             {
@@ -407,13 +407,13 @@ namespace OfficeScript.Report
             }
             set
             {
-                this.shape.Width = value;
+                this.shape.Width = (float)value;
             }
         }
         /// <summary>
         /// Get or Set the Rotation-Property for this element.
         /// </summary>
-        public float Rotation
+        public double Rotation
         {
             get
             {
@@ -421,7 +421,7 @@ namespace OfficeScript.Report
             }
             set
             {
-                this.shape.Rotation = value;
+                this.shape.Rotation = (float)value;
             }
         }
 
