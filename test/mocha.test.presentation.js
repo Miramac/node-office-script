@@ -124,6 +124,24 @@ describe('report', function() {
                 assert.equal(shape.width(), 200);
                 presentation.close(done);
             });
+            it('should be able to insert a picture', function (done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var slide = presentation.slides()[2];
+                var shapeCount = slide.shapes().length;
+                slide.addPicture(path.join(testDataPath, 'ga.png'));
+                assert.equal(slide.shapes().length, shapeCount + 1);
+                presentation.close(done);
+            });
+            it('should be able to insert a picture with top=100,left=100', function (done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var slide = presentation.slides()[2];
+                var shapeCount = slide.shapes().length;
+                var shape = slide.addPicture(path.join(testDataPath, 'ga.png'), {top: 100, left: 100});
+                assert.equal(slide.shapes().length, shapeCount + 1);
+                assert.equal(shape.top(), 100);
+                assert.equal(shape.left(), 100);
+                presentation.close(done);
+            });
             it('should be able to set and have a tag on slide1', function(done) {
                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
                 var slide = presentation.slides()[1];
