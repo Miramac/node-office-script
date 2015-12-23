@@ -22,10 +22,10 @@
   "bugs": {
     "url": "https://github.com/Miramac/node-office-script/issues"
   },
-  "keywords": [ 
-      "office",
-      "presentation",
-      "powerpoint"
+  "keywords": [
+    "office",
+    "presentation",
+    "powerpoint"
   ],
   "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {
@@ -33,6 +33,7 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
+    "del": "^2.2.0",
     "gulp": "^3.9.0",
     "mocha": "^2.3.4"
   }
