@@ -377,6 +377,24 @@ namespace OfficeScript.Report
                 return this.presentation.FullName;
             }
         }
+        
+        public float SlideHeight 
+        {
+            get
+            {
+                return this.presentation.PageSetup.SlideHeight;   
+            }
+            
+        }
+        
+        public float SlideWidth 
+        {
+            get
+            {
+                return this.presentation.PageSetup.SlideWidth;   
+            }
+            
+        }
         #endregion
     }
 }
