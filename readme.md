@@ -65,10 +65,11 @@ Because of this, I recommend to use the sync presentation wrapper. It also has t
     
     //get name and text of the first shape
     console.log('shape name:', shapes[0].name());
-    console.log('Title shape count:', shapes[0].text());
+    console.log('Title shape text:', shapes[0].text());
     
     //change name of the first
     shapes[0].name('First Shape');
+    //change text of the first
     shapes[0].text('FuBar');
     
     //Setter retun the destination object so you can chain them
