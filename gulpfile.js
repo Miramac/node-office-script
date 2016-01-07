@@ -1,9 +1,12 @@
 var gulp = require('gulp');
 var exec = require('child_process').exec;
 var path = require('path');
+var del = require('del');
 
-gulp.task('build', ['deploy'], function() {
-    console.log('Done!');
+var dest = './dist';
+var src = './src/OfficeScript/OfficeScript/bin/Debug/*.dll'
+
+gulp.task('build',  ['deploy'], function() {
 });
 
 gulp.task('compile', function(cb) {
@@ -14,10 +17,14 @@ gulp.task('compile', function(cb) {
       });
 });
 
-
-gulp.task('deploy', ['compile'], function() {
+gulp.task('deploy', ['clean', 'compile'], function() {
     
     //Copy .NET functionsto /dist
-    return gulp.src('./src/OfficeScript/OfficeScript/bin/Debug/*.dll')
-    .pipe(gulp.dest('./dist'));
+    return gulp.src(src)
+    .pipe(gulp.dest(dest));
+});
+
+gulp.task('clean', function(){
+    //clean /dist
+    return del(dest)
 });

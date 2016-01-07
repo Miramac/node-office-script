@@ -2,7 +2,10 @@
 
 *Early alpha stage...*
 
-Scripting MS Office application with node.js using [NetOffice](http://netoffice.codeplex.com/) and edge.js.
+Office-Script is a Microsoft Office application automation with node.js.
+It does not work with the Open Office XML document, instead it accesses the COM interop interface of the Offices application.
+Therefore, you must have Office installed!
+
 
 ## Install
 ```sh
@@ -16,7 +19,7 @@ PowerPoint application automation.
     var path = require('path');
     var powerpoint = require('office-script').powerpoint;
 
-    //Create a new instance of PowerPoint an try to open Presentation
+    //Create a new instance of PowerPoint and try to open the presentation
     powerpoint.open(path.join(__dirname, 'Presentation01.pptx'), function(err, presentation) {
         if(err) throw err;
         //use presentation object
@@ -62,10 +65,11 @@ Because of this, I recommend to use the sync presentation wrapper. It also has t
     
     //get name and text of the first shape
     console.log('shape name:', shapes[0].name());
-    console.log('Title shape count:', shapes[0].text());
+    console.log('Title shape text:', shapes[0].text());
     
     //change name of the first
     shapes[0].name('First Shape');
+    //change text of the first
     shapes[0].text('FuBar');
     
     //Setter retun the destination object so you can chain them
@@ -90,7 +94,11 @@ If `path` is missing or `null`, the active presentation is used.
 * .fullName() `String readonly` Presentation path with presentation name
 
 ### presentation methods
-* .addSlide([pos]) *returns Slide*
+* .addSlide([pos]) *return slide object*
+* .close([callback]) 
+* .save([callback]) 
+* .saveAs(fullName [, callback]) 
+* .saveAsCopy(fullName [, callback]) 
 
 ## presentation.slides([selector])
 Get presentation slides. Optional filterd by the selector.
@@ -102,16 +110,16 @@ If `value` is provided, it will set the property and return the slide
 
 ### Slide methods
 * .remove()
-* .addTextbox(options) *returns Shape*
-* .addPicture(options) *returns Shape*
+* .addTextbox(options) *return shape object*
+* .addPicture(options) *return shape object*
 
 
 ## presentation.shapes([selector] [, context])
 Get presentation shapes. Optional filterd by the selector. Context is an optional slides array.
 ## slide.shapes([selector])
-Get slide shapes. Optional filterd by the selector. Context is an optional slides array.
+Get slide shapes. Optional filterd by the selector.
 ### Property methods
-If `value` is provided, it will set the property and return the shape
+If `value` is provided, it will set the property and return the shape. If not, it will return the value.
 * .name([value]) `String`
 * .text([value]) `String`
 * .top([value])  `Float`
@@ -121,3 +129,5 @@ If `value` is provided, it will set the property and return the shape
 * .rotation([value])  `Float`
 * .fill([value])  `String`
 * .altText([value])  `String`
+
+
