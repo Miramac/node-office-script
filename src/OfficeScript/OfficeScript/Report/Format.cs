@@ -1,8 +1,10 @@
 ﻿using System;
 using NetOffice.OfficeApi.Enums;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+
 
 namespace OfficeScript.Report
 {
@@ -110,15 +112,31 @@ namespace OfficeScript.Report
             }
         }
         
-        public MsoTriState BulletFontBold
+        public string BulletFontBold
         {
             get
             {
-                return (MsoTriState)this.format.Bullet.Font.Bold;
+                switch (this.format.Bullet.Font.Bold)
+                {
+                    case MsoTriState.msoTrue:
+                        return "true";
+                    case MsoTriState.msoFalse:
+                        return "false";
+                    default:
+                        return this.format.Bullet.Font.Bold.ToString();
+                }
             }
             set
             {
-                this.format.Bullet.Font.Bold = value;
+                switch (value.ToLower())
+                {
+                    case "true":
+                        this.format.Bullet.Font.Bold = MsoTriState.msoTrue;
+                        break;
+                    case "false":
+                        this.format.Bullet.Font.Bold = MsoTriState.msoFalse;
+                        break;
+                }
             }
         }
         
@@ -134,15 +152,16 @@ namespace OfficeScript.Report
             }
         }
         
-        public NetOffice.OfficeApi.ColorFormat BulletFontColor
+        public string BulletFontColor
         {
             get
             {
-                return (NetOffice.OfficeApi.ColorFormat)this.format.Bullet.Font.Fill.ForeColor;
+                string bgr = "#" + this.format.Bullet.Font.Fill.ForeColor.RGB.ToString("x6");
+                return Util.BGRtoRGB(bgr);
             }
             set
             {
-                this.format.Bullet.Font.Fill.ForeColor = value;
+                this.format.Bullet.Font.Fill.ForeColor.RGB = ColorTranslator.FromHtml(Util.BGRtoRGB(value)).ToArgb();
             }
         }
         
@@ -158,15 +177,31 @@ namespace OfficeScript.Report
             }
         }
         
-        public MsoTriState BulletVisible
+        public string BulletVisible
         {
             get
             {
-                return (MsoTriState)this.format.Bullet.Visible;
+                switch (this.format.Bullet.Visible)
+                {
+                    case MsoTriState.msoTrue:
+                        return "true";
+                    case MsoTriState.msoFalse:
+                        return "false";
+                    default:
+                        return this.format.Bullet.Visible.ToString();
+                }
             }
             set
             {
-                this.format.Bullet.Visible = value;
+                switch (value.ToLower())
+                {
+                    case "true":
+                        this.format.Bullet.Visible = MsoTriState.msoTrue;
+                        break;
+                    case "false":
+                        this.format.Bullet.Visible = MsoTriState.msoFalse;
+                        break;
+                }
             }
         }
         
@@ -194,75 +229,124 @@ namespace OfficeScript.Report
             }
         }
         
-        public MsoTriState HangingPunctuation
+        public string HangingPunctuation
         {
             get
             {
-                return (MsoTriState)this.format.HangingPunctuation;
+                switch (this.format.HangingPunctuation)
+                {
+                    case MsoTriState.msoTrue:
+                        return "true";
+                    case MsoTriState.msoFalse:
+                        return "false";
+                    default:
+                        return this.format.HangingPunctuation.ToString();
+                }
             }
             set
             {
-                this.format.HangingPunctuation = value;
+                switch (value.ToLower())
+                {
+                    case "true":
+                        this.format.HangingPunctuation = MsoTriState.msoTrue;
+                        break;
+                    case "false":
+                        this.format.HangingPunctuation = MsoTriState.msoFalse;
+                        break;
+                }
             }
         }
         
-        public MsoTriState LineRuleBefore
+        public string LineRuleBefore
         {
             get
             {
-                return (MsoTriState)this.format.LineRuleBefore;
+                switch (this.format.LineRuleBefore)
+                {
+                    case MsoTriState.msoTrue:
+                        return "true";
+                    case MsoTriState.msoFalse:
+                        return "false";
+                    default:
+                        return this.format.LineRuleBefore.ToString();
+                }
             }
             set
             {
-                this.format.LineRuleBefore = value;
+                switch (value.ToLower())
+                {
+                    case "true":
+                        this.format.LineRuleBefore = MsoTriState.msoTrue;
+                        break;
+                    case "false":
+                        this.format.LineRuleBefore = MsoTriState.msoFalse;
+                        break;
+                }
             }
         }
         
-        public MsoTriState LineRuleAfter
+        public string LineRuleAfter
         {
             get
             {
-                return (MsoTriState)this.format.LineRuleAfter;
+                switch (this.format.LineRuleAfter)
+                {
+                    case MsoTriState.msoTrue:
+                        return "true";
+                    case MsoTriState.msoFalse:
+                        return "false";
+                    default:
+                        return this.format.LineRuleAfter.ToString();
+                }
             }
             set
             {
-                this.format.LineRuleAfter = value;
+                switch (value.ToLower())
+                {
+                    case "true":
+                        this.format.LineRuleAfter = MsoTriState.msoTrue;
+                        break;
+                    case "false":
+                        this.format.LineRuleAfter = MsoTriState.msoFalse;
+                        break;
+                }
             }
         }
         
-        public MsoTriState SpaceBefore
+       public double SpaceBefore
         {
+            
             get
             {
-                return (MsoTriState)this.format.LineRuleAfter;
+                return this.format.SpaceBefore;
             }
             set
             {
-                this.format.LineRuleAfter = value;
+                this.format.SpaceBefore = (float)value;
             }
         }
         
-        public MsoTriState SpaceAfter
+        public double SpaceAfter
         {
             get
             {
-                return (MsoTriState)this.format.SpaceAfter;
+                return this.format.SpaceAfter;
             }
             set
             {
-                this.format.LineRuleAfter = value;
+                this.format.SpaceAfter = (float)value;
             }
         }
         
-        public float SpaceWithin
+        public double SpaceWithin
         {
             get
             {
-                return (float)this.format.SpaceWithin;
+                return this.format.SpaceWithin;
             }
             set
             {
-                this.format.SpaceWithin = value;
+                this.format.SpaceWithin = (float)value;
             }
         }
 
