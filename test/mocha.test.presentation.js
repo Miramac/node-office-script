@@ -20,12 +20,18 @@ describe('report', function() {
         });
         describe('#attr', function() {
             it('should get a name, path, and fullPath attribute from presentation', function(done) {
-                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
                 //get Path Sync
                 assert.equal(presentation.path(), testDataPath);
                 assert.equal(presentation.name(), testPPT01);
                 assert.equal(presentation.fullName(), path.join(testDataPath, testPPT01));
                 //Close file
+                presentation.close(done);
+            });
+            it('should have slideWidth and slide Height', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                assert.equal(presentation.slideHeight(), 540);
+                assert.equal(presentation.slideWidth(), 720);
                 presentation.close(done);
             });
         });
@@ -312,6 +318,16 @@ describe('report', function() {
                     }
                 }
                 assert.equal(counter, 13); 
+                presentation.close(done);
+            });
+            it('should have and set zIndex', function(done) {
+                var presentation = new Presentation(path.join(testDataPath, testPPT01));
+                var shape = presentation.slides()[2].shapes()[1];
+                assert.equal(shape.zIndex(), 2);
+                shape.zIndex('back');
+                assert.equal(shape.zIndex(), 1);
+                shape.zIndex('forward');
+                assert.equal(shape.zIndex(), 2);
                 presentation.close(done);
             });
         });
