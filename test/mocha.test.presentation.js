@@ -409,18 +409,6 @@ describe('report', function() {
                 assert.equal(para.align('left').align(), 'left');
                 presentation.close(done);   
             });
-            it('should have the attribute "bullet"', function(done) {
-                var presentation = new Presentation(path.join(testDataPath, testPPT01));
-                var para = presentation.slides()[0].shapes()[0].paragraph(1);
-                assert.equal(para.bullet(), 8226);
-                presentation.close(done);   
-            });
-            it('should be able to change the attribute "bullet"', function(done) {
-                var presentation = new Presentation(path.join(testDataPath, testPPT01));
-                var para = presentation.slides()[0].shapes()[0].paragraph(1);
-                assert.equal(para.bullet(8210).bullet(), 8210);
-                presentation.close(done);   
-            });
             it('should have the attribute "indent"', function(done) {
                 var presentation = new Presentation(path.join(testDataPath, testPPT01));
                 var para = presentation.slides()[2].shapes()[1].paragraph();
