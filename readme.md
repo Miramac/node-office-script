@@ -55,9 +55,9 @@ Because of this, I recommend to use the sync presentation wrapper. It also has t
     //open a new PPT Presentation  
     var presentation = new Presentation(path.join(__dirname,'Presentation01.pptx'));
     
-    //get presentation slides  
+    //get presentation slides
     var slides = presentation.slides();
-    console.log('Slide count:', slides.length);
+    console.log('Slide count: ', slides.length);
     
     //Get all shapes of the first slide 
     var shapes = slides[0].shapes();
@@ -80,54 +80,157 @@ Because of this, I recommend to use the sync presentation wrapper. It also has t
     //SaveAs new presentation and quit application 
     presentation.saveAs(path.join(__dirname,'Presentation01_New.pptx'));
     presentation.quit(); //Close presentation & quit application  
-
-
 ```
 # Synchronous API
 ## Presentation([path]);
 If path exists the presentation will be open. 
-If `path` not exists, an allready open presentation with the name of `path` will be used. 
+If `path` does not exist, an allready open presentation with the name of `path` will be used. 
 If `path` is missing or `null`, the active presentation is used.
-### Property methods 
-* .name() `String readonly` Presentation name
-* .path() `String readonly` Presentation path
-* .fullName() `String readonly` Presentation path with presentation name
+___
+    
+### Presentation methods
 
-### presentation methods
-* .addSlide([pos]) *return slide object*
-* .close([callback]) 
-* .save([callback]) 
-* .saveAs(fullName [, callback]) 
-* .saveAsCopy(fullName [, callback]) 
+####.addSlide([pos]) *returns slide object*
+Adds a new empty slide on the provided postiton an returns it. If no postiton was provided, the new slide will be added at the end.
+___
+####.close([callback]) 
+Closes the active presentation without exiting powerpoint itself.
+___
+####.quit([callback])
+Closes the active presentation and powerpoint itself.
+___
+####.save([callback])
+Saves the active presentation.
+___
+####.saveAs(fullName [, callback])
+Saves the active presentation to the provided path and name.
+___
+####.saveAsCopy(fullName [, callback])
+Saves the active presentation as copy to the provided path and name.
+___
+
+### Property methods 
+
+####.builtinProp([property, value]) `multifunctional` 
+Without parameters, returns all builtin properties with their vlaues.
+With `property`, returns value of the specific builtin property.
+With `property` and `value`, sets value of specific builtin property.
+___
+####.customProp([property, value]) `multifunctional` 
+Without parameters, returns all custom properties with their vlaues.
+With `property`, returns value of the specific custom property.
+With `property` and `value`, sets/ccustomreates value of specific custom property
+___
+####.fullName() `String readonly` Presentation path with presentation name
+####.name() `String readonly` Presentation name
+####.path() `String readonly` Presentation path
+####.slideHeight() `Number readonly` Slide/presentation height
+####.slideWidth() `Number readonly` Slide/presentation width
+####.type() `String readonly` Presentation type
+
+### Tag methods
+####.tags returns all tags
+####.tag *object with tag functions*
+####.tag.get(name) returns value of specific tag
+####.tag.set(name, value) set value of specific tag
+####.tag.remove(name) removes tag
 
 ## presentation.slides([selector])
 Get presentation slides. Optional filterd by the selector.
-### Property methods
-If `value` is provided, it will set the property and return the slide
-* .name([value]) `String` 
-* .pos([value] `Int`
-* .number([value])  `Int readonly`
+## presentation.activeSlide()
+Get active slide.
 
 ### Slide methods
-* .remove()
-* .addTextbox(options) *return shape object*
-* .addPicture(options) *return shape object*
+####.addTextbox(options) *returns shape object*
+####.addPicture(options) *returns shape object*
+####.dublicate() *returns slide object*
+####.remove()
 
+### Property methods
+If `value` is provided, it will set the property and return the slide
+####.name([value]) `String` 
+####.number([value]) `Int readonly`
+####.pos([value]) `Int`
+
+### Slide tag methods
+####.tags returns all tags
+####.tag *object with tag functions*
+####.tag.get(name) returns value of specific tag
+####.tag.set(name, value) set value of specific tag
+####.tag.remove(name) removes tag
 
 ## presentation.shapes([selector] [, context])
 Get presentation shapes. Optional filterd by the selector. Context is an optional slides array.
+## presentation.selectedShape()
+Get selected shape.
 ## slide.shapes([selector])
 Get slide shapes. Optional filterd by the selector.
+
+### Shape methods
+####.addline(text[, pos]) *returns paragraph object*
+####.dublicate() *returns shape object*
+####.exportAs(options) *returns shape object*
+####.remove() 
+####.shape.removeLine(pos) *returns paragraph object*
+####.textReplace(findString, replaceString) *returns shape object*
+####.zIndex([command]) *returns shape object*
+
 ### Property methods
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
-* .name([value]) `String`
-* .text([value]) `String`
-* .top([value])  `Float`
-* .left([value])  `Float`
-* .height([value])  `Float`
-* .width([value])  `Float`
-* .rotation([value])  `Float`
-* .fill([value])  `String`
-* .altText([value])  `String`
+####.altText([value]) `String` *Not implemented yet*
+####.fill([value]) `String`
+####.height([value]) `Float`
+####.left([value]) `Float`
+####.name([value]) `String`
+####.parent() *Not implemented yet*
+####.rotation([value]) `Float`
+####.table() *Not implemented yet*
+####.text([value]) `String`
+####.top([value]) `Float`
+####.width([value]) `Float`
+
+### Shape tag methods
+####.tags returns all tags
+####.tag *object with tag functions*
+####.tag.get(name) returns value of specific tag
+####.tag.set(name, value) set value of specific tag
+####.tag.remove(name) removes tag
+
+## shape.paragraph(start, length)
+Get paragraph object. Optional filterd by start and length.
+
+### Property methods
+If `value` is provided, it will set the property and return the shape. If not, it will return the value.
+####.text([value]) `String readonly`
+####.count()
+####.fontName([value])
+####.fontSize([value])
+####.fontColor([value])
+####.fontItalic([value])
+####.fontBold([value])
+####.align([value])
+####.indent([value])
+####.bulletCharacter([value])
+####.bulletFontName([value])
+####.bulletFontBold([value])
+####.bulletFontSize([value])
+####.bulletFontColor([value])
+####.bulletVisible([value])
+####.bulletRelativeSize([value])
+####.firstLineIndent([value])
+####.leftIndent([value])
+####.lineRuleBefore([value])
+####.lineRuleAfter([value])
+####.hangingPunctuation([value])
+####.spaceBefore([value])
+####.spaceAfter([value])
+####.spaceWithin([value])
+
+### Paragraph methods
+####.copyFont(srcParagraph)
+####.copyFormat(srcParagraph)
+####.copyStyle(srcParagraph)
+####.remove()
 
 
+ 
