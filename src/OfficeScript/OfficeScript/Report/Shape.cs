@@ -462,6 +462,35 @@ namespace OfficeScript.Report
             }
         }
 
+        // public Dictionary<string, object> Table
+        public object[] Table
+        {
+            get
+            {
+                object[] returnTable = null;
+                int rowCount, columnCount;
+                if (this.shape.HasTable == MsoTriState.msoTrue)
+                {
+                    returnTable = new object[shape.Table.Rows.Count];
+
+                    rowCount = 0;
+                    foreach (PowerPoint.Row row in shape.Table.Rows)
+                    {
+                        object[] cells = new object[shape.Table.Columns.Count];
+                        columnCount = 0;
+                        foreach (PowerPoint.Cell cell in row.Cells)
+                        {
+                            cells[columnCount++] = (cell.Shape.HasTextFrame == MsoTriState.msoTrue) ? cell.Shape.TextFrame.TextRange.Text : null;
+                        }
+                        returnTable[rowCount++] = cells;
+
+                    }
+                }
+                return returnTable;
+            }
+        }
+
+
         #endregion Properties
     }
 }
