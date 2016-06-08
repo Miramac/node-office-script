@@ -184,7 +184,7 @@ If `value` is provided, it will set the property and return the shape. If not, i
 ####.name([value]) `String`
 ####.parent() *Not implemented yet*
 ####.rotation([value]) `Float`
-####.table() *Not implemented yet*
+####.table() `array` *Read-Only*
 ####.text([value]) `String`
 ####.top([value]) `Float`
 ####.width([value]) `Float`
