@@ -343,14 +343,20 @@ namespace OfficeScript.Report
         {
             get
             {
-                
-                return this.shape.TextFrame.TextRange.Text;
-                
+                if(this.shape.HasTextFrame == MsoTriState.msoTrue)
+                {
+                    return this.shape.TextFrame.TextRange.Text;
+                } else
+                {
+                    return null;
+                }
             }
             set
             {
-                this.shape.TextFrame.TextRange.Text = value;
-               
+                if (this.shape.HasTextFrame == MsoTriState.msoTrue)
+                {
+                    this.shape.TextFrame.TextRange.Text = value;
+                }               
             }
         }
 
