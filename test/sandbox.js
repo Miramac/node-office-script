@@ -1,25 +1,37 @@
-var path = require('path');
+var path = require('path')
 var Presentation = require('../').Presentation
 
-var presentation = new Presentation(path.join(__dirname,'/data/Testpptx_00.pptx'));
+//var presentation = new Presentation(path.join(__dirname, '/data/Testpptx_00.pptx'))
+var presentation = new Presentation()
+// get presentation slides
+var slides = presentation.slides()
+
+var i, j, shapes
+
+console.log('Slide count:', slides.length)
+for (i = 0; i < slides.length; i++) {
+  shapes = slides[i].shapes()
+  console.log('Slide Num:', slides[i].pos())
+  console.log('Shape count:', shapes.length)
+  for (j = 0; j < shapes.length; j++) {
+    console.log(shapes[j].name(), shapes[j].text(), shapes[j].table())
+  }
+}
+
+console.log(slides[2].shapes()[0].table().length)
 
 
-    
-    //get presentation slides  
-    var slides = presentation.slides();
-    console.log('Slide count:', slides.length);
-    
-    
-    //Get all shapes of the first slide 1 
-    var shapes = slides[0].shapes();
-    
-    var p = shapes[0].p();
-    var form = p.format()
-    console.log(form.attr('Bullet',true));
-    
-    
+// presentation.quit()
+
+// Get all shapes of the first slide 1 
+// var shapes = slides[0].shapes();
+
+// var p = shapes[0].p();
+// var form = p.format()
+// console.log(form.attr('Bullet',true)); 
+
 //     console.log('Title shape count:', shapes.length);
-//     
+//
 //     //get name and text of the first shape
 //     var shape =  shapes[0];
 //      console.log('Title shape count:', shape.text());
