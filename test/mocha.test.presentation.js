@@ -329,6 +329,12 @@ describe('report', function () {
         assert.equal(shape.zIndex(), 2)
         presentation.close(done)
       })
+      it('should be able to replace a text', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        assert.equal(shape.textReplace('01', 'XX').text(), 'Testpptx_XX')
+        presentation.close(done)
+      })
     })
     describe('#paragraphs', function () {
       it('should have the attribute "text"', function (done) {
