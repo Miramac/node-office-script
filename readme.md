@@ -177,7 +177,7 @@ Get slide shapes. Optional filterd by the selector.
 
 ### Property methods
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
-####.altText([value]) `String` *Not implemented yet*
+####.altText([value]) `String`
 ####.fill([value]) `String`
 ####.height([value]) `Float`
 ####.left([value]) `Float`
@@ -201,7 +201,7 @@ Get paragraph object. Optional filterd by start and length.
 
 ### Property methods
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
-####.text([value]) `String readonly`
+####.text([value])
 ####.count()
 ####.fontName([value])
 ####.fontSize([value])
