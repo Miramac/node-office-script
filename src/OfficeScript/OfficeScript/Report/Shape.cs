@@ -85,6 +85,11 @@ namespace OfficeScript.Report
                     {
                         return officeScriptType;
                     }),
+                hasObject = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return this.HasObject((string)input);
+                    }),
                 getZindex = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -99,8 +104,6 @@ namespace OfficeScript.Report
 
             };
         }
-
-  
 
         /// <summary>
         /// Duplicate this Shape
@@ -179,9 +182,12 @@ namespace OfficeScript.Report
         {
             string path = (string)parameters["path"];
             string type = "png";
-            float heigth = 542;
-            float width = 722;
-            float scale = 2;
+           // float heigth = 542;
+           // float width = 722;
+           // float scale = 2;
+            float heigth = this.shape.Height;
+            float width =  this.shape.Width;
+            float scale =  1;
 
             object tmp;
 
@@ -221,11 +227,37 @@ namespace OfficeScript.Report
                 case "jpg":
                     ppShapeFormat = PowerPoint.Enums.PpShapeFormat.ppShapeFormatJPG;
                     break;
+                case "emf":
+                    ppShapeFormat = PowerPoint.Enums.PpShapeFormat.ppShapeFormatEMF;
+                    break;
                 default:
                     ppShapeFormat = PowerPoint.Enums.PpShapeFormat.ppShapeFormatPNG;
                     break;
             }
             this.shape.Export(path, ppShapeFormat, width * scale, heigth * scale, PowerPoint.Enums.PpExportMode.ppRelativeToSlide);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        private bool HasObject(string name)
+        {
+            switch(name.ToLower())
+            {
+                case "chart":
+                    return (this.shape.HasChart == MsoTriState.msoTrue);
+                case "diagram":
+                    return (this.shape.HasDiagram == MsoTriState.msoTrue);
+                case "table":
+                    return (this.shape.HasTable == MsoTriState.msoTrue);
+                case "text":
+                case "textframe":
+                    return (this.shape.HasTextFrame == MsoTriState.msoTrue);
+                default:
+                    return false;
+            }
         }
 
         /// <summary>
