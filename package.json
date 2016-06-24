@@ -1,6 +1,6 @@
 {
   "name": "office-script",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "description": "Microsoft Office application automation.",
   "main": "index.js",
   "directories": {
@@ -18,7 +18,7 @@
     "name": "Fabian Roloff",
     "email": "fabian.roloff@vocatus.de"
   },
-  "license": "GPL V2",
+  "license": "ISC",
   "bugs": {
     "url": "https://github.com/Miramac/node-office-script/issues"
   },
