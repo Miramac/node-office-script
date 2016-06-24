@@ -1,11 +1,12 @@
 # OfficeScript
 
-*Early alpha stage...*
-
 Office-Script is a Microsoft Office application automation with node.js.
 It does not work with the Open Office XML document, instead it accesses the COM interop interface of the Offices application.
 Therefore, you must have Office installed!
 
+*Only on tested with Win 7 and Office 2007.*
+
+> *Work in progress.. Just ask if you have any question or feature requests!*
 
 ## Install
 ```sh
@@ -44,7 +45,7 @@ PowerPoint application automation.
     });
 ```
 # sync vs. async
-Office-Script is written in an async pattern, but application automation has serious problems with async... 
+Office-Script is written in an async pattern, but application automation can has serious problems with async... 
 
 Because of this, I recommend to use the sync presentation wrapper. It also has the more readable API. 
 
@@ -174,7 +175,13 @@ Get slide shapes. Optional filterd by the selector.
 ####.shape.removeLine(pos) *returns paragraph object*
 ####.textReplace(findString, replaceString) *returns shape object*
 ####.zIndex([command]) *returns shape object*
-
+#### .has(name) *Check if the current shape has a table, chart or textframe*
+```javascript
+// export chart-shapes as EMF
+if (shapes[i].has('chart')) {
+  shapes[i].exportAs({path: path.join(__dirname, shapes[i].name() + '.emf'), type: 'emf'})
+}
+```
 ### Property methods
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
 ####.altText([value]) `String`

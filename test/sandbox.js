@@ -1,24 +1,46 @@
 var path = require('path')
 var Presentation = require('../').Presentation
 
-//var presentation = new Presentation(path.join(__dirname, '/data/Testpptx_00.pptx'))
-var presentation = new Presentation()
+var presentation = new Presentation(path.join(__dirname, '/data/Testpptx_00.pptx'))
+//var presentation = new Presentation()
 // get presentation slides
 var slides = presentation.slides()
-
-var i, j, shapes
-
 console.log('Slide count:', slides.length)
-for (i = 0; i < slides.length; i++) {
-  shapes = slides[i].shapes()
-  console.log('Slide Num:', slides[i].pos())
-  console.log('Shape count:', shapes.length)
-  for (j = 0; j < shapes.length; j++) {
-    console.log(shapes[j].name(), shapes[j].text(), shapes[j].table())
+var powerpoint = require('../').powerpoint
+var shapes = presentation.shapes()
+
+for (var i = 0; i < shapes.length; i++) {
+  if(shapes[i].has('chart')) {
+      shapes[i].exportAs({path: path.join(__dirname, 'data/chart_4.emf'), type: 'emf'})
+  } 
+  if(shapes[i].has('table')) {
+      console.log(shapes[i].name())
+  }
+  if(shapes[i].has('text')) {
+      console.log(shapes[i].text())
   }
 }
+presentation.quit()
+powerpoint.quit(true, true)
 
-console.log(slides[2].shapes()[0].table().length)
+// var i, j, shapes
+
+// console.log('Slide count:', slides.length)
+// for (i = 0; i < slides.length; i++) {
+//   shapes = slides[i].shapes()
+//   console.log('Slide Num:', slides[i].pos())
+//   console.log('Shape count:', shapes.length)
+//   for (j = 0; j < shapes.length; j++) {
+//     console.log(shapes[j].name(), shapes[j].text(), shapes[j].table())
+//   }
+// }
+
+// var shape = presentation.getSelectedShape()
+// console.log( shape.textReplace('a', 'X'))
+
+// shape.textReplace('a', 'X').textReplace('X', 'a')
+
+// console.log(slides[2].shapes()[0].table().length)
 
 
 // presentation.quit()
