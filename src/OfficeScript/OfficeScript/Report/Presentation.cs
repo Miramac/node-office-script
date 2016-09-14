@@ -189,7 +189,13 @@ namespace OfficeScript.Report
                     {
                         return this.GetActiveSlide();
                     }
-                )
+                ),
+                pasteSlide = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        
+                        return this.PasteSlide((int)input);
+                    })
             };
         }
 
@@ -328,6 +334,11 @@ namespace OfficeScript.Report
             }
 
             return slides.ToArray();
+        }
+
+        private object PasteSlide(int index)
+        {
+            return new Slide(this.presentation.Slides.Paste(index).FirstOrDefault()).Invoke();
         }
 
         private object GetSelectedShape()

@@ -55,6 +55,12 @@ namespace OfficeScript.Report
                     {
                         return this.Duplicate();
                     }),
+                copy = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.Copy();
+                        return new Slide(this.slide).Invoke();
+                    }),
                 shapes = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -125,6 +131,14 @@ namespace OfficeScript.Report
             return new Slide(this.slide.Duplicate()[1]).Invoke();
         }
 
+        /// <summary>
+        /// Copy Slide
+        /// </summary>
+        private void Copy()
+        {
+            this.slide.Copy();
+        }
+        
         /// <summary>
         /// Not yet Implemented!
         /// </summary>

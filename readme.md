@@ -140,12 +140,15 @@ ___
 Get presentation slides. Optional filterd by the selector.
 ## presentation.activeSlide()
 Get active slide.
+#### presentation.pasteSlide([index]) 
+Pastes the slides on the Clipboard into the Slides collection for the presentation. Returns the pasted slide. Index `-1` moves the slide to the end of the presentation.
 
 ### Slide methods
 ####.addTextbox(options) *returns shape object*
 ####.addPicture(options) *returns shape object*
 ####.dublicate() *returns slide object*
-####.remove()
+####.remove() *delete the slide*
+####.copy() *copy the slide to the Clipboard*
 
 ### Property methods
 If `value` is provided, it will set the property and return the slide

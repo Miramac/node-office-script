@@ -1,6 +1,35 @@
 var path = require('path')
 var Presentation = require('../').Presentation
 
+
+var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))
+var presentation02 = new Presentation(path.join(__dirname, '/data/Testpptx_02.pptx'))
+// var presentation = new Presentation()
+
+var slide1 = presentation01.slides()[0].copy()
+console.log(slide1.name())
+var slide2 = presentation02.pasteSlide(-1)
+console.log(slide2.pos())
+setTimeout(() => {
+  presentation01.close()
+  presentation02.quit()
+}, 5000)
+
+
+/*var shapes = presentation.shapes()
+
+for (var i = 0; i < shapes.length; i++) {
+  if (shapes[i].altText().indexOf('coc_object_id=0698;') > 0) {
+    console.log(shapes[i].name())
+  } else if (shapes[i].altText() !== '') {
+    console.log(shapes[i].altText())
+  }
+}
+*/
+
+//presentation.quit()
+
+/*
 var presentation = new Presentation(path.join(__dirname, '/data/Testpptx_00.pptx'))
 //var presentation = new Presentation()
 // get presentation slides
@@ -22,7 +51,7 @@ for (var i = 0; i < shapes.length; i++) {
 }
 presentation.quit()
 powerpoint.quit(true, true)
-
+*/
 // var i, j, shapes
 
 // console.log('Slide count:', slides.length)

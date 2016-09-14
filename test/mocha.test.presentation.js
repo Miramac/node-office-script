@@ -38,7 +38,8 @@ describe('report', function () {
       it('should have 13 builtin properties', function (done) {
         var presentation = new Presentation(path.join(testDataPath, testPPT01))
         var props = presentation.builtinProp()
-        var counter = 0, key
+        var counter = 0
+        var key
         for (key in props) {
           if (props.hasOwnProperty(key)) {
             counter++
@@ -163,7 +164,8 @@ describe('report', function () {
         slide.tag.set('Flash', 'Barry Allen')
         slide = presentation.slides()[1]
         var tags = slide.tags
-        var counter = 0, key
+        var counter = 0
+        var key
         for (key in tags) {
           if (tags.hasOwnProperty(key)) {
             counter++
@@ -173,13 +175,21 @@ describe('report', function () {
         slide.tag.remove('Flash')
         slide = presentation.slides()[1]
         tags = slide.tags
-        counter = 0, key
+        counter = 0
         for (key in tags) {
           if (tags.hasOwnProperty(key)) {
             counter++
           }
         }
         assert.equal(counter, 2)
+        presentation.close(done)
+      })
+      it('should be able to copy/paste a slide', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var slideCount = presentation.slides().length
+        presentation.slides()[1].copy()
+        presentation.pasteSlide(-1)
+        assert.equal(presentation.slides().length, slideCount + 1)
         presentation.close(done)
       })
     })
