@@ -172,6 +172,13 @@ namespace OfficeScript.Report
                         return this.AddSlide((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                     }
                 ),
+                textReplace = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.TextReplace((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
+                        return this.Invoke();
+                    }
+                ),
                 getType = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -313,6 +320,63 @@ namespace OfficeScript.Report
             
             return new Slide(this.presentation.Slides.Add(pos, layout)).Invoke();
         }
+        
+        /// <summary>
+        /// Find and replace in presentation
+        /// </summary>
+        /// <param name="parameters"></param>
+        private void TextReplace(Dictionary<string, object> parameters)
+        {
+            string find = null;
+            string replace = null;
+            object tmp;
+
+
+            if (parameters.TryGetValue("find", out tmp))
+            {
+                find = (string)tmp;
+            }
+            if (parameters.TryGetValue("replace", out tmp))
+            {
+                replace = (string)tmp;
+            }
+     
+            if(find != null && replace != null){
+                TextReplace(find, replace);
+            }
+        }
+
+        /// <summary>
+        /// Find and replace in presentation
+        /// </summary>
+        private void TextReplace(string find, string replace)
+        {
+            foreach (PowerPoint.Slide pptSlide in this.presentation.Slides)
+            {
+                foreach(PowerPoint.Shape pptShape in pptSlide.Shapes)
+                {
+                    //for textboxes
+                    if (pptShape.HasTextFrame == NetOffice.OfficeApi.Enums.MsoTriState.msoTrue)
+                    {
+                        pptShape.TextFrame.TextRange.Replace(find, replace);
+                    }
+                    //for Tables
+                    else if (pptShape.HasTable == NetOffice.OfficeApi.Enums.MsoTriState.msoTrue)
+                    {
+                        foreach (PowerPoint.Row row in pptShape.Table.Rows)
+                        {
+                            foreach (PowerPoint.Cell cell in row.Cells)
+                            {
+                                if (cell.Shape.HasTextFrame == NetOffice.OfficeApi.Enums.MsoTriState.msoTrue)
+                                {
+                                    cell.Shape.TextFrame.TextRange.Replace(find, replace);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         /// <summary>
         /// Init slide Array
@@ -395,7 +459,6 @@ namespace OfficeScript.Report
             {
                 return this.presentation.PageSetup.SlideHeight;   
             }
-            
         }
         
         public float SlideWidth 
@@ -404,7 +467,6 @@ namespace OfficeScript.Report
             {
                 return this.presentation.PageSetup.SlideWidth;   
             }
-            
         }
         #endregion
     }

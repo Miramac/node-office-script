@@ -2,6 +2,22 @@ var path = require('path')
 var Presentation = require('../').Presentation
 
 
+var presentation01 = new Presentation()
+
+// var i, j
+// var slides = presentation01.slides()
+// var shapes
+// for (i = 0; i < slides.length; i++) {
+//   shapes = slides[i].shapes()
+//   for (j = 0; j < shapes.length; j++) {
+//     shapes[j].textReplace('<CurrWave>', '12345')
+//   }
+// }
+
+
+presentation01.textReplace('<CurrWave>', '12345')
+
+/*
 var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))
 var presentation02 = new Presentation(path.join(__dirname, '/data/Testpptx_02.pptx'))
 // var presentation = new Presentation()
@@ -14,20 +30,20 @@ setTimeout(() => {
   presentation01.close()
   presentation02.quit()
 }, 5000)
+*/
 
-
-/*var shapes = presentation.shapes()
+/* var shapes = presentation.shapes()
 
 for (var i = 0; i < shapes.length; i++) {
   if (shapes[i].altText().indexOf('coc_object_id=0698;') > 0) {
-    console.log(shapes[i].name())
+  console.log(shapes[i].name())
   } else if (shapes[i].altText() !== '') {
-    console.log(shapes[i].altText())
+  console.log(shapes[i].altText())
   }
 }
 */
 
-//presentation.quit()
+// presentation.quit()
 
 /*
 var presentation = new Presentation(path.join(__dirname, '/data/Testpptx_00.pptx'))
@@ -40,13 +56,13 @@ var shapes = presentation.shapes()
 
 for (var i = 0; i < shapes.length; i++) {
   if(shapes[i].has('chart')) {
-      shapes[i].exportAs({path: path.join(__dirname, 'data/chart_4.emf'), type: 'emf'})
+    shapes[i].exportAs({path: path.join(__dirname, 'data/chart_4.emf'), type: 'emf'})
   } 
   if(shapes[i].has('table')) {
-      console.log(shapes[i].name())
+    console.log(shapes[i].name())
   }
   if(shapes[i].has('text')) {
-      console.log(shapes[i].text())
+    console.log(shapes[i].text())
   }
 }
 presentation.quit()
@@ -60,7 +76,7 @@ powerpoint.quit(true, true)
 //   console.log('Slide Num:', slides[i].pos())
 //   console.log('Shape count:', shapes.length)
 //   for (j = 0; j < shapes.length; j++) {
-//     console.log(shapes[j].name(), shapes[j].text(), shapes[j].table())
+//   console.log(shapes[j].name(), shapes[j].text(), shapes[j].table())
 //   }
 // }
 
@@ -81,29 +97,29 @@ powerpoint.quit(true, true)
 // var form = p.format()
 // console.log(form.attr('Bullet',true)); 
 
-//     console.log('Title shape count:', shapes.length);
+//   console.log('Title shape count:', shapes.length);
 //
-//     //get name and text of the first shape
-//     var shape =  shapes[0];
-//      console.log('Title shape count:', shape.text());
-//      shape.tag.set('FU', 'bar')
-//     console.log('tag:', shape.tag.get('fu'));
-//     shape.tag.remove('FU')
-//    console.log('allTags:', shape.tags);
-//     
-    
-    
-    //change name of the first
-    // shape.name('First Shape');
-    // shape.text('FuBar');
-    //    console.log(shape.name(), shape.text());
-    //Setter retun the destination object so you can chain them
+//   //get name and text of the first shape
+//   var shape =  shapes[0];
+//    console.log('Title shape count:', shape.text());
+//    shape.tag.set('FU', 'bar')
+//   console.log('tag:', shape.tag.get('fu'));
+//   shape.tag.remove('FU')
+//  console.log('allTags:', shape.tags);
+//   
+  
+  
+  //change name of the first
+  // shape.name('First Shape');
+  // shape.text('FuBar');
+  //  console.log(shape.name(), shape.text());
+  //Setter retun the destination object so you can chain them
   //  shape.top(10).left(10).height(100).width(200);
-      
     
-    // //Save presentation as PDF (sync)
-    // presentation.saveAs({name:path.join(__dirname,'Presentation01.pdf'), type:'pdf'});
-    // //SaveAs new presentation and quit application 
+  
+  // //Save presentation as PDF (sync)
+  // presentation.saveAs({name:path.join(__dirname,'Presentation01.pdf'), type:'pdf'});
+  // //SaveAs new presentation and quit application 
    // presentation.saveAs(path.join(__dirname,'Presentation01_New.pptx'));
   // presentation.quit(); //Close presentation & quit application  
 
@@ -144,35 +160,35 @@ var slides = presentation.slides({"attr:Name":'Slide1,Slide2'}, true)
 var i, j;
 
 // for(i=0; i<slides.length; i++) {
-    // console.log("Slide:", slides[i].attr('Name', true))
-    // var shapes = slides[i].shapes({'attr:Name':'TextBox 3','tag:ctobjectdata.id':'shape1'},true);
-    // for(j=0; j<shapes.length; j++) {
-        // console.log("Shape:", shapes[j].attr('Name', true))
-    // }
+  // console.log("Slide:", slides[i].attr('Name', true))
+  // var shapes = slides[i].shapes({'attr:Name':'TextBox 3','tag:ctobjectdata.id':'shape1'},true);
+  // for(j=0; j<shapes.length; j++) {
+    // console.log("Shape:", shapes[j].attr('Name', true))
+  // }
 // }
 
 
 var slides = presentation.slides({"attr:Name":'Slide2'}, function(err, slides){
-    var i, j;
+  var i, j;
 
-    for(i=0; i<slides.length; i++) {
-        console.log("Slide:", slides[i].attr('Name', true))
-        var shapes = slides[i].shapes({'attr:Name':'TextBox 3','tag:ctobjectdata.id':'shape1'},true);
-        for(j=0; j<shapes.length; j++) {
-            console.log("Shape:", shapes[j].attr('Name', true))
-        }
+  for(i=0; i<slides.length; i++) {
+    console.log("Slide:", slides[i].attr('Name', true))
+    var shapes = slides[i].shapes({'attr:Name':'TextBox 3','tag:ctobjectdata.id':'shape1'},true);
+    for(j=0; j<shapes.length; j++) {
+      console.log("Shape:", shapes[j].attr('Name', true))
     }
+  }
 })
 var slides = presentation.slides({"attr:Name":'Slide1'}, function(err, slides){
-    var i, j;
+  var i, j;
 
-    for(i=0; i<slides.length; i++) {
-        console.log("Slide:", slides[i].attr('Name', true))
-        var shapes = slides[i].shapes({'attr:Name':'TextBox 3','tag:ctobjectdata.id':'shape1'},true);
-        for(j=0; j<shapes.length; j++) {
-            console.log("Shape:", shapes[j].attr('Name', true))
-        }
+  for(i=0; i<slides.length; i++) {
+    console.log("Slide:", slides[i].attr('Name', true))
+    var shapes = slides[i].shapes({'attr:Name':'TextBox 3','tag:ctobjectdata.id':'shape1'},true);
+    for(j=0; j<shapes.length; j++) {
+      console.log("Shape:", shapes[j].attr('Name', true))
     }
+  }
 })
 
 */
@@ -198,11 +214,11 @@ var slides = presentation.slides({"attr:Name":'Slide1'}, function(err, slides){
 // console.log($shape.attr('Name'));
 
 // slides[0].addTextbox({top:100, left:100, height:200, width:200}, function (err, shape) {
-    // console.log(shape);
-    // var s = Shape(shape);
-    // s.text('Foo Bar');
-    // console.log(shape.attr({ name: "Height" }, true))
-    // console.log(s.left());
+  // console.log(shape);
+  // var s = Shape(shape);
+  // s.text('Foo Bar');
+  // console.log(shape.attr({ name: "Height" }, true))
+  // console.log(s.left());
 // })
 //presentation.close(null,application.quit)
 
@@ -212,35 +228,35 @@ var slides = presentation.slides({"attr:Name":'Slide1'}, function(err, slides){
 
 /*
  report.open(__dirname+'\\data\\Testpptx_02.pptx', function(err, presentation) {
-    //use presentation object
-    console.log('Presentation Name:', presentation.attr({name:'Name'}, true)); 
-    console.log('Presentation Path:', presentation.attr({name:'Path'}, true)); 
-    console.log('Presentation FullName:',presentation.attr({'name':'FullName'}, true));
-    presentation.slides(null, function(err, slides) {
+  //use presentation object
+  console.log('Presentation Name:', presentation.attr({name:'Name'}, true)); 
+  console.log('Presentation Path:', presentation.attr({name:'Path'}, true)); 
+  console.log('Presentation FullName:',presentation.attr({'name':'FullName'}, true));
+  presentation.slides(null, function(err, slides) {
+    if(err) throw err;
+    console.log('Slides count:', slides.length);
+    console.log('Slides props:', slides);
+    slides[1].shapes(null, function(err, shapes) {
+      var shape0 = shapes[0];
+      var shape1 = shapes[1];
+      console.log('Shape count on slide 1:', shapes.length);
+      shape0.attr({'name':'Text', 'value': 'Fu Bar'}, true); //Set text value
+      console.log('get Text first shape:', shape0.attr({'name':'Text'}, true));
+      
+      console.log('get Text first shape:', shape0.attr({'name':'Text'}, true));
+      
+      console.log(slides[1].addTextbox({}, true).attr({name:'Name'},true));
+      console.log(shape1.paragraph({'start':5}, true).attr({name:'Text', value:"test"}, true));
+       
+      // close presentation
+       presentation.close(null, function(err){
         if(err) throw err;
-        console.log('Slides count:', slides.length);
-        console.log('Slides props:', slides);
-        slides[1].shapes(null, function(err, shapes) {
-            var shape0 = shapes[0];
-            var shape1 = shapes[1];
-            console.log('Shape count on slide 1:', shapes.length);
-            shape0.attr({'name':'Text', 'value': 'Fu Bar'}, true); //Set text value
-            console.log('get Text first shape:', shape0.attr({'name':'Text'}, true));
-            
-            console.log('get Text first shape:', shape0.attr({'name':'Text'}, true));
-            
-            console.log(slides[1].addTextbox({}, true).attr({name:'Name'},true));
-            console.log(shape1.paragraph({'start':5}, true).attr({name:'Text', value:"test"}, true));
-           
-            // close presentation
-             presentation.close(null, function(err){
-                if(err) throw err;
-                report.quit()
-            });
-        });
+        report.quit()
+      });
     });
+  });
 });
 
-    */
-    
-    
+  */
+  
+  

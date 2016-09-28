@@ -95,20 +95,24 @@ ___
 Adds a new empty slide on the provided postiton an returns it. If no postiton was provided, the new slide will be added at the end.
 ___
 ####.close([callback]) 
-Closes the active presentation without exiting powerpoint itself.
+Closes the presentation without exiting powerpoint itself.
 ___
 ####.quit([callback])
-Closes the active presentation and powerpoint itself.
+Closes the presentation and powerpoint itself.
 ___
 ####.save([callback])
-Saves the active presentation.
+Saves the presentation.
 ___
 ####.saveAs(fullName [, callback])
-Saves the active presentation to the provided path and name.
+Saves the presentation to the provided path and name.
 ___
 ####.saveAsCopy(fullName [, callback])
-Saves the active presentation as copy to the provided path and name.
+Saves the presentation as copy to the provided path and name.
 ___
+####.textReplace(find, replace)
+Find and replace text in the entire presentation.
+___
+
 
 ### Property methods 
 
