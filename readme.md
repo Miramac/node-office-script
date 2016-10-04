@@ -2,7 +2,7 @@
 
 Office-Script is a Microsoft Office application automation with node.js.
 It does not work with the Open Office XML document, instead it accesses the COM interop interface of the Offices application.
-Therefore, you must have Office installed!
+Therefore, you must have Office installed! Also be carefull, **Microsoft strongly recommends against Office Automation from software solutions**  https://support.microsoft.com/en-us/kb/257757
 
 *Only on tested with Win 7 and Office 2007.*
 
