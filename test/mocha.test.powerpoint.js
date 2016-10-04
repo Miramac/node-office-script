@@ -7,7 +7,7 @@ var testDataPath = path.join(__dirname, 'data')
 
 describe('report', function () {
   this.timeout(15000)
-  after(function (done) {powerpoint.quit(null, done);})
+  after(function (done) { powerpoint.quit(null, done) })
   describe('presentation', function () {
     describe('#open&close', function () {
       it('should open and close the file', function (done) {
@@ -20,6 +20,7 @@ describe('report', function () {
     describe('#fetch', function () {
       it('should fetch an open presentation', function (done) {
         powerpoint.open(path.join(testDataPath, testPPT01), function (err) {
+          if (err) throw err
           powerpoint.fetch(null, function (err, presentation) {
             if (err) throw err
             presentation.close(null, done)

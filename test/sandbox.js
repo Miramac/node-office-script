@@ -1,8 +1,9 @@
 var path = require('path')
 var Presentation = require('..').Presentation
 
-
-var presentation01 = new Presentation()
+var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))
+// var presentation02 = new Presentation(path.join(__dirname, '/data/Testpptx_02.pptx'))
+// var presentation01 = new Presentation()
 
 // var i, j
 // var slides = presentation01.slides()
@@ -17,17 +18,20 @@ var presentation01 = new Presentation()
 
 var replaces = {
   '<Txt_IV_005>': 1234,
-  '<Txt_IV_532>': 'Fu',
-  '<Txt_IV_533>': 'Bar'
+  '<Txt_IV_532>': '<xyz> Fu',
+  'Testpptx': '<Txt_IV_532> Bar',
+  '<xyz>': 'ABC'
 }
-var start = new Date()
-//presentation01.textReplace('<CurrWave>', '12345')
-console.log(new Date(new Date() - start).toLocaleTimeString())
-start = new Date()
-presentation01.textReplace(replaces, function () {
-  console.log(new Date(new Date() - start).toLocaleTimeString())
-})
+try {
+  // presentation01.textReplace('<CurrWave>', '12345')
+  presentation01.textReplace(replaces)
+} catch (e) {
+  console.error(e)
+}
 
+setTimeout(() => {
+  presentation01.quit()
+}, 5000)
 
 /*
 var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))

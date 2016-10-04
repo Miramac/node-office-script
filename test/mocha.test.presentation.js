@@ -66,6 +66,23 @@ describe('report', function () {
         assert.equal(1, 1)
         presentation.close(done)
       })
+      it('should find and replace text', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        presentation.textReplace('Testpptx', 'Fu Bar')
+        assert.equal(presentation.slides()[0].shapes()[0].text(), 'Fu Bar_01')
+        presentation.close(done)
+      })
+      it('should batch find and replace text', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var replaces = {
+          '<Txt_IV_005>': 1234,
+          '<Txt_IV_532>': 'Fu',
+          'Testpptx': '<Txt_IV_532> Bar'
+        }
+        presentation.textReplace(replaces)
+        assert.equal(presentation.slides()[0].shapes()[0].text(), 'Fu Bar_01')
+        presentation.close(done)
+      })
     })
     describe('#slides', function () {
       it('should have 3 slides', function (done) {
