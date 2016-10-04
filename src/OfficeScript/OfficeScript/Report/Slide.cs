@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using PowerPoint = NetOffice.PowerPointApi;
-using System.Dynamic;
+using NetOffice.OfficeApi.Enums;
 
 namespace OfficeScript.Report
 {
@@ -84,6 +83,12 @@ namespace OfficeScript.Report
                     {
                         input = (input == null) ? new Dictionary<string, object>() : input;
                         return this.AddPicture((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
+                    }),
+                textReplace = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.TextReplace((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
+                        return this.Invoke();
                     }),
                 getType = (Func<object, Task<object>>)(
                     async (input) =>
@@ -268,8 +273,6 @@ namespace OfficeScript.Report
             return new Shape(this.slide.Shapes.AddPicture(path, NetOffice.OfficeApi.Enums.MsoTriState.msoFalse, NetOffice.OfficeApi.Enums.MsoTriState.msoTrue, left, top)).Invoke();
         }
 
-
-
         internal bool TestFilter(IDictionary<string, object> filter)
         {
 
@@ -316,6 +319,111 @@ namespace OfficeScript.Report
             return false;
         }
 
+/// <summary>
+        /// Find and replace in presentation
+        /// </summary>
+        /// <param name="parameters"></param>
+        private void TextReplace(Dictionary<string, object> parameters)
+        {
+            string find = null;
+            string replace = null;
+            Dictionary<string, object> replaces = null;
+            object tmp;
+
+            if (parameters.TryGetValue("find", out tmp))
+            {
+                find = (string)tmp;
+            }
+            if (parameters.TryGetValue("replace", out tmp))
+            {
+                replace = (string)tmp;
+            }
+            
+            if (parameters.TryGetValue("batch", out tmp))
+            {
+                replaces = (tmp as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value);
+            }
+     
+            if(find != null && replace != null){
+                TextReplace(find, replace);
+            }
+            if(replaces != null){
+                BatchTextReplace(replaces);
+            }
+        }
+
+        /// <summary>
+        /// Find and replace in presentation
+        /// </summary>
+        private void TextReplace(string find, string replace)
+        {
+            foreach(PowerPoint.Shape shape in slide.Shapes)
+            {
+                //for textboxes
+                if (shape.HasTextFrame == MsoTriState.msoTrue)
+                {
+                    shape.TextFrame.TextRange.Replace(find, replace);
+                }
+                //for Tables
+                else if (shape.HasTable == MsoTriState.msoTrue)
+                {
+                    foreach (PowerPoint.Row row in shape.Table.Rows)
+                    {
+                        foreach (PowerPoint.Cell cell in row.Cells)
+                        {
+                            if (cell.Shape.HasTextFrame == MsoTriState.msoTrue)
+                            {
+                                cell.Shape.TextFrame.TextRange.Replace(find, replace);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Mass Find and replace in presentation
+        /// </summary>
+        private void BatchTextReplace(Dictionary<string, object> replaces)
+        {
+            foreach(PowerPoint.Shape shape in slide.Shapes)
+            {
+                if(shape.HasTextFrame == MsoTriState.msoTrue || shape.HasTable == MsoTriState.msoTrue)
+                {
+                    //for textboxes
+                    if (shape.HasTextFrame == MsoTriState.msoTrue)
+                    {
+                        TextReplace(shape.TextFrame.TextRange,replaces);
+                    }
+                    //for Tables
+                    else if (shape.HasTable == MsoTriState.msoTrue)
+                    {
+                        foreach (PowerPoint.Row row in shape.Table.Rows)
+                        {
+                            foreach (PowerPoint.Cell cell in row.Cells)
+                            {
+                                if (cell.Shape.HasTextFrame == MsoTriState.msoTrue)
+                                {
+                                    TextReplace(cell.Shape.TextFrame.TextRange, replaces);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void TextReplace(PowerPoint.TextRange textRange, Dictionary<string, object> replaces) 
+        {
+            var text = textRange.Text;
+            foreach (var replace in replaces) 
+            {
+                if(text.Contains(replace.Key)) 
+                {
+                    textRange.Replace(replace.Key, replace.Value.ToString());
+                }
+            }
+        }
 
         /// <summary>
         /// 

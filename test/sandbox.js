@@ -1,5 +1,5 @@
 var path = require('path')
-var Presentation = require('../').Presentation
+var Presentation = require('..').Presentation
 
 
 var presentation01 = new Presentation()
@@ -15,7 +15,19 @@ var presentation01 = new Presentation()
 // }
 
 
-presentation01.textReplace('<CurrWave>', '12345')
+var replaces = {
+  '<Txt_IV_005>': 1234,
+  '<Txt_IV_532>': 'Fu',
+  '<Txt_IV_533>': 'Bar'
+}
+var start = new Date()
+//presentation01.textReplace('<CurrWave>', '12345')
+console.log(new Date(new Date() - start).toLocaleTimeString())
+start = new Date()
+presentation01.textReplace(replaces, function () {
+  console.log(new Date(new Date() - start).toLocaleTimeString())
+})
+
 
 /*
 var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))
