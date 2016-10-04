@@ -328,6 +328,7 @@ namespace OfficeScript.Report
             string find = null;
             string replace = null;
             Dictionary<string, object> replaces = null;
+            Dictionary<string, string> newReplaces = null;
             object tmp;
 
             if (parameters.TryGetValue("find", out tmp))
@@ -342,13 +343,24 @@ namespace OfficeScript.Report
             if (parameters.TryGetValue("batch", out tmp))
             {
                 replaces = (tmp as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value);
+                newReplaces = new Dictionary<string, string>();
+                // repalce in Array
+                foreach(var i in replaces) 
+                {
+                    var newValue = i.Value.ToString();
+                    foreach(var j in replaces) 
+                    {
+                        newValue = newValue.Replace(j.Key, j.Value.ToString());
+                    }
+                    newReplaces.Add(i.Key, newValue);
+                }
             }
-     
+
             if(find != null && replace != null){
                 TextReplace(find, replace);
             }
-            if(replaces != null){
-                BatchTextReplace(replaces);
+            if(newReplaces != null){
+                BatchTextReplace(newReplaces);
             }
         }
 
@@ -384,7 +396,7 @@ namespace OfficeScript.Report
         /// <summary>
         /// Mass Find and replace in slide
         /// </summary>
-        private void BatchTextReplace(Dictionary<string, object> replaces)
+        private void BatchTextReplace(Dictionary<string, string> replaces)
         {
             foreach(PowerPoint.Shape shape in slide.Shapes)
             {
@@ -393,7 +405,7 @@ namespace OfficeScript.Report
                     //for textboxes
                     if (shape.HasTextFrame == MsoTriState.msoTrue)
                     {
-                        TextReplace(shape.TextFrame.TextRange,replaces);
+                        TextReplace(shape.TextFrame.TextRange, replaces);
                     }
                     //for Tables
                     else if (shape.HasTable == MsoTriState.msoTrue)
@@ -413,14 +425,14 @@ namespace OfficeScript.Report
             }
         }
 
-        private void TextReplace(PowerPoint.TextRange textRange, Dictionary<string, object> replaces) 
+        private void TextReplace(PowerPoint.TextRange textRange, Dictionary<string, string> replaces) 
         {
             var text = textRange.Text;
             foreach (var replace in replaces) 
             {
                 if(text.Contains(replace.Key)) 
                 {
-                    textRange.Replace(replace.Key, replace.Value.ToString());
+                    textRange.Replace(replace.Key, replace.Value);
                 }
             }
         }
