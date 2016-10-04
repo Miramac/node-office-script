@@ -1,8 +1,15 @@
 var path = require('path')
 var Presentation = require('..').Presentation
 
-
+// var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))
+// var presentation02 = new Presentation(path.join(__dirname, '/data/Testpptx_02.pptx'))
 var presentation01 = new Presentation()
+var shape = presentation01.slides()[0].shapes()[0]
+var para = shape.paragraph(1)
+console.log(para.text())
+var char = shape.char(4, 2)
+console.log(char.text())
+console.log(char.fontBold(true))
 
 // var i, j
 // var slides = presentation01.slides()
@@ -15,24 +22,23 @@ var presentation01 = new Presentation()
 // }
 
 
-var replaces = {
-  '<Txt_IV_005>': 1234,
-  '<Txt_IV_532>': 'Fu',
-  '<Txt_IV_533>': 'Bar'
-}
-var start = new Date()
-//presentation01.textReplace('<CurrWave>', '12345')
-console.log(new Date(new Date() - start).toLocaleTimeString())
-start = new Date()
-presentation01.textReplace(replaces, function () {
-  console.log(new Date(new Date() - start).toLocaleTimeString())
-})
+// var replaces = {
+//   '<Txt_IV_005>': 1234,
+//   '<Txt_IV_532>': 'Fu',
+//   '<Txt_IV_533>': 'Bar'
+// }
+// var start = new Date()
+// //presentation01.textReplace('<CurrWave>', '12345')
+// console.log(new Date(new Date() - start).toLocaleTimeString())
+// start = new Date()
+// presentation01.textReplace(replaces, function () {
+//   console.log(new Date(new Date() - start).toLocaleTimeString())
+// })
+
 
 
 /*
-var presentation01 = new Presentation(path.join(__dirname, '/data/Testpptx_01.pptx'))
-var presentation02 = new Presentation(path.join(__dirname, '/data/Testpptx_02.pptx'))
-// var presentation = new Presentation()
+
 
 var slide1 = presentation01.slides()[0].copy()
 console.log(slide1.name())

@@ -7,13 +7,13 @@ using PowerPoint = NetOffice.PowerPointApi;
 
 namespace OfficeScript.Report
 {
-    public class Paragraph
+    public class Character
     {
         private PowerPoint.Shape shape;
         private int start;
         private int length;
 
-        public Paragraph(PowerPoint.Shape shape, Dictionary<string, object> parameters)
+        public Character(PowerPoint.Shape shape, Dictionary<string, object> parameters)
         {
             this.shape = shape;
             object tmp;
@@ -62,11 +62,6 @@ namespace OfficeScript.Report
                        this.Remove();
                        return null;
                    }),
-                format = (Func<object, Task<object>>)(
-                    async (input) =>
-                    {
-                        return new Format(this).Invoke();
-                    }),
                 font = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -80,7 +75,7 @@ namespace OfficeScript.Report
         /// </summary>
         private void Remove()
         {
-            this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Delete();
+            this.shape.TextFrame.TextRange.Characters(this.start, this.length).Delete();
         }
 
         /// <summary>
@@ -90,23 +85,11 @@ namespace OfficeScript.Report
         {
             get
             {
-                return this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Text.TrimEnd();
+                return this.shape.TextFrame.TextRange.Characters(this.start, this.length).Text;
             }
             set
             {
-                string text = value;
-                int i;
-
-                for (i = this.shape.TextFrame.TextRange.Paragraphs().Count; i < this.start; i++)
-                {
-                    this.shape.TextFrame.TextRange.Paragraphs(this.shape.TextFrame.TextRange.Paragraphs().Count).InsertAfter(Environment.NewLine);
-                }
-
-                //if (this.shape.TextFrame.TextRange.Paragraphs().Count < this.start)
-                //{
-                    //text = Environment.NewLine + text;
-                //}
-                this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Text = text;
+                this.shape.TextFrame.TextRange.Characters(this.start, this.length).Text = value;
             }
         }
         /// <summary>
@@ -116,7 +99,7 @@ namespace OfficeScript.Report
         {
             get
             {
-                return this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Lines().Count;
+                return this.shape.TextFrame.TextRange.Characters(this.start, this.length).Count;
             }
         }
 
@@ -126,7 +109,7 @@ namespace OfficeScript.Report
         /// <returns></returns>
         public NetOffice.OfficeApi.TextRange2 GetUnderlyingObject()
         {
-            return this.shape.TextFrame2.TextRange.Paragraphs(this.start, this.length);
+            return this.shape.TextFrame2.TextRange.Characters(this.start, this.length);
         }
 
     }
