@@ -382,7 +382,7 @@ namespace OfficeScript.Report
         }
 
         /// <summary>
-        /// Mass Find and replace in presentation
+        /// Mass Find and replace in slide
         /// </summary>
         private void BatchTextReplace(Dictionary<string, object> replaces)
         {
