@@ -1,19 +1,20 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using PowerPoint = NetOffice.PowerPointApi;
+using Office = NetOffice.OfficeApi;
 
 namespace OfficeScript.Report
 {
-    public class Paragraph
+    public class Character
     {
         private PowerPoint.Shape shape;
         private int start;
         private int length;
 
-        public Paragraph(PowerPoint.Shape shape, Dictionary<string, object> parameters)
+        public Character(PowerPoint.Shape shape, Dictionary<string, object> parameters)
         {
             this.shape = shape;
             object tmp;
@@ -80,7 +81,7 @@ namespace OfficeScript.Report
         /// </summary>
         private void Remove()
         {
-            this.shape.TextFrame.TextRange.Paragraphs(this.start, this.length).Delete();
+            this.shape.TextFrame.TextRange.Characters(this.start, this.length).Delete();
         }
 
         /// <summary>

@@ -62,6 +62,12 @@ namespace OfficeScript.Report
                         input = (input == null) ? new Dictionary<string, object>() : input;
                         return new Paragraph(this.shape, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value)).Invoke();
                     }),
+                character = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        input = (input == null) ? new Dictionary<string, object>() : input;
+                        return new Character(this.shape, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value)).Invoke();
+                    }),
                 textReplace = (Func<object, Task<object>>)(
                     async (input) =>
                     {

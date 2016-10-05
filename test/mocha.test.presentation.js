@@ -327,7 +327,8 @@ describe('report', function () {
         shape.tag.set('Flash', 'Barry Allen')
         shape = presentation.slides()[2].shapes()[1]
         var tags = shape.tags
-        var counter = 0, key
+        var counter = 0
+        var key
         for (key in tags) {
           if (tags.hasOwnProperty(key)) {
             counter++
@@ -337,7 +338,7 @@ describe('report', function () {
         shape.tag.remove('Flash')
         shape = presentation.slides()[2].shapes()[1]
         tags = shape.tags
-        counter = 0, key
+        counter = 0
         for (key in tags) {
           if (tags.hasOwnProperty(key)) {
             counter++
@@ -451,6 +452,86 @@ describe('report', function () {
         var presentation = new Presentation(path.join(testDataPath, testPPT01))
         var para = presentation.slides()[2].shapes()[1].paragraph()
         assert.equal(para.indent(2).indent(), 2)
+        presentation.close(done)
+      })
+    })
+    describe('#characters', function () {
+      it('should have the attribute "text"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.text(), 'est')
+        presentation.close(done)
+      })
+      it('should be able to change the attribute "text"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        char.text('XXX')
+        assert.equal(shape.text(), 'TXXXpptx_01')
+        presentation.close(done)
+      })
+      it('should have the attribute "count"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.count(), 3)
+        presentation.close(done)
+      })
+      it('should have the attribute "fontName"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontName(), 'Calibri')
+        presentation.close(done)
+      })
+      it('should be able to change the attribute "fontName"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontName('Arial').fontName(), 'Arial')
+        presentation.close(done)
+      })
+      it('should have the attribute "fontColor"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontColor(), '#000000')
+        presentation.close(done)
+      })
+      it('should be able to change the attribute "fontColor"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontColor('#FF0000').fontColor(), '#ff0000')
+        presentation.close(done)
+      })
+      it('should have the attribute "fontItalic"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontItalic(), false)
+        presentation.close(done)
+      })
+      it('should be able to change the attribute "fontItalic"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontItalic(true).fontItalic(), true)
+        presentation.close(done)
+      })
+      it('should have the attribute "fontBold"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontBold(), false)
+        presentation.close(done)
+      })
+      it('should be able to change the attribute "fontBold"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[0].shapes()[0]
+        var char = shape.character(2, 3)
+        assert.equal(char.fontBold(true).fontBold(), true)
         presentation.close(done)
       })
     })

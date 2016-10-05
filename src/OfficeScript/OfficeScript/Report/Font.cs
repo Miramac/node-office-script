@@ -1,31 +1,49 @@
 ﻿using System;
-using NetOffice.OfficeApi.Enums;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using NetOffice.OfficeApi.Enums;
+using Office = NetOffice.OfficeApi;
 
 namespace OfficeScript.Report
 {
     class Font
     {
-        private NetOffice.OfficeApi.Font2 font;
-        private Paragraph paragraph;
+        private Office.Font2 font;
+        private Paragraph paragraph = null;
+        private Character character = null;
         private bool disposed;
+        private Func<object> parentInvoke;
 
-        public Font(NetOffice.OfficeApi.Font2 font)
+        public Font(Office.Font2 font, Func<object> parentInvoke)
         {
             this.font = font;
+            this.parentInvoke = parentInvoke;
         }
 
-        public Font(Paragraph paragraph)
+        public Font(Paragraph paragraph, Func<object> parentInvoke)
         {
             this.paragraph = paragraph;
+            this.parentInvoke = parentInvoke;
         }
-        
+
+        public Font(Character character, Func<object> parentInvoke)
+        {
+            this.character = character;
+            this.parentInvoke = parentInvoke;
+        }
+
         private void Init()
         {
-            this.font = this.paragraph.GetUnderlyingObject().Font;
+            if(this.paragraph != null)
+            {
+                this.font = this.paragraph.GetUnderlyingObject().Font;
+            }
+            if (this.character != null)
+            {
+                this.font = this.character.GetUnderlyingObject().Font;
+            }
         }
 
         public object Invoke()
@@ -42,7 +60,7 @@ namespace OfficeScript.Report
                            input = tmp;
                        }
                        Init();
-                       return Util.Attr(this, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value), paragraph.Invoke);
+                       return Util.Attr(this, (input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value), parentInvoke);
                    }),
             };
         }
