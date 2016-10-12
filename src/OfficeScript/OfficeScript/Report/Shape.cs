@@ -86,11 +86,6 @@ namespace OfficeScript.Report
                         ExportAs((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                         return null;
                     }),
-                getType = (Func<object, Task<object>>)(
-                    async (input) =>
-                    {
-                        return officeScriptType;
-                    }),
                 hasObject = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -106,6 +101,17 @@ namespace OfficeScript.Report
                     {
                         this.SetZindex((string)input);
                         return this.Invoke();
+                    }),
+                dispose = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.shape.Dispose();
+                        return null;
+                    }),
+                getType = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return officeScriptType;
                     })
 
             };
@@ -518,7 +524,8 @@ namespace OfficeScript.Report
                         columnCount = 0;
                         foreach (PowerPoint.Cell cell in row.Cells)
                         {
-                            cells[columnCount++] = (cell.Shape.HasTextFrame == MsoTriState.msoTrue) ? cell.Shape.TextFrame.TextRange.Text : null;
+                            cells[columnCount++] = new Shape(cell.Shape).Invoke();
+                            // cells[columnCount++] = (cell.Shape.HasTextFrame == MsoTriState.msoTrue) ? cell.Shape.TextFrame.TextRange.Text : null;
                         }
                         returnTable[rowCount++] = cells;
 

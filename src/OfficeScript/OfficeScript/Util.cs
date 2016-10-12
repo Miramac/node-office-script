@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PowerPoint = NetOffice.PowerPointApi;
 
 namespace OfficeScript
 {
@@ -55,6 +56,18 @@ namespace OfficeScript
             string g = value.Substring(3, 2);
             string r = value.Substring(5, 2);
             return "#" + r + g + b;
+        }
+
+        public static void ShapeTextReplace(PowerPoint.TextRange textRange, Dictionary<string, string> replaces) 
+        {
+           // var text = textRange.Text;
+            foreach (var replace in replaces) 
+            {
+                while(textRange.Text.Contains(replace.Key)) 
+                {
+                    textRange.Replace(replace.Key, replace.Value);
+                }
+            }
         }
     }
 }

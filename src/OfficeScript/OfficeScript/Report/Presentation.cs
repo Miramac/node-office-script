@@ -178,12 +178,6 @@ namespace OfficeScript.Report
                         return this.Invoke();
                     }
                 ),
-                getType = (Func<object, Task<object>>)(
-                    async (input) =>
-                    {
-                        return officeScriptType;
-                    }
-                ),
                 getSelectedShape = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -201,7 +195,19 @@ namespace OfficeScript.Report
                     {
                         
                         return this.PasteSlide((int)input);
-                    })
+                    }),
+                dispose = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.presentation.Dispose();
+                        return null;
+                    }),
+                getType = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        return officeScriptType;
+                    }
+                )
             };
         }
 
@@ -358,42 +364,10 @@ namespace OfficeScript.Report
             }
 
             if(find != null && replace != null){
-                TextReplace(find, replace);
+                BatchTextReplace(new Dictionary<string, string>() {{find, replace }});
             }
             if(newReplaces != null){
                 BatchTextReplace(newReplaces);
-            }
-        }
-
-        /// <summary>
-        /// Find and replace in presentation
-        /// </summary>
-        private void TextReplace(string find, string replace)
-        {
-            foreach (PowerPoint.Slide slide in this.presentation.Slides)
-            {
-                foreach(PowerPoint.Shape shape in slide.Shapes)
-                {
-                    //for textboxes
-                    if (shape.HasTextFrame == MsoTriState.msoTrue)
-                    {
-                        shape.TextFrame.TextRange.Replace(find, replace);
-                    }
-                    //for Tables
-                    else if (shape.HasTable == MsoTriState.msoTrue)
-                    {
-                        foreach (PowerPoint.Row row in shape.Table.Rows)
-                        {
-                            foreach (PowerPoint.Cell cell in row.Cells)
-                            {
-                                if (cell.Shape.HasTextFrame == MsoTriState.msoTrue)
-                                {
-                                    cell.Shape.TextFrame.TextRange.Replace(find, replace);
-                                }
-                            }
-                        }
-                    }
-                }
             }
         }
 
@@ -411,7 +385,7 @@ namespace OfficeScript.Report
                         //for textboxes
                         if (shape.HasTextFrame == MsoTriState.msoTrue)
                         {
-                            TextReplace(shape.TextFrame.TextRange, replaces);
+                            Util.ShapeTextReplace(shape.TextFrame.TextRange, replaces);
                         }
                         //for Tables
                         else if (shape.HasTable == MsoTriState.msoTrue)
@@ -422,24 +396,12 @@ namespace OfficeScript.Report
                                 {
                                     if (cell.Shape.HasTextFrame == MsoTriState.msoTrue)
                                     {
-                                        TextReplace(cell.Shape.TextFrame.TextRange, replaces);
+                                        Util.ShapeTextReplace(cell.Shape.TextFrame.TextRange, replaces);
                                     }
                                 }
                             }
                         }
                     }
-                }
-            }
-        }
-
-        private void TextReplace(PowerPoint.TextRange textRange, Dictionary<string, string> replaces) 
-        {
-            var text = textRange.Text;
-            foreach (var replace in replaces) 
-            {
-                if(text.Contains(replace.Key)) 
-                {
-                    textRange.Replace(replace.Key, replace.Value);
                 }
             }
         }

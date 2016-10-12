@@ -60,6 +60,12 @@ namespace OfficeScript.Report
                         this.Copy();
                         return new Slide(this.slide).Invoke();
                     }),
+                select = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.slide.Select();
+                        return new Slide(this.slide).Invoke();
+                    }),
                 shapes = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -89,6 +95,12 @@ namespace OfficeScript.Report
                     {
                         this.TextReplace((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                         return this.Invoke();
+                    }),
+                dispose = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.slide.Dispose();
+                        return null;
                     }),
                 getType = (Func<object, Task<object>>)(
                     async (input) =>
