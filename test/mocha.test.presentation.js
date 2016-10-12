@@ -8,7 +8,7 @@ var testDataPath = path.join(__dirname, 'data')
 
 describe('report', function () {
   this.timeout(15000)
-  after(function (done) {powerpoint.quit(null, done);})
+  after(function (done) { powerpoint.quit(null, done) })
   describe('presentation', function () {
     describe('#open&close', function () {
       it('should open and close the file', function (done) {
@@ -85,10 +85,10 @@ describe('report', function () {
       })
     })
     describe('#slides', function () {
-      it('should have 3 slides', function (done) {
+      it('should have 4 slides', function (done) {
         var presentation = new Presentation(path.join(testDataPath, testPPT01))
         var slides = presentation.slides()
-        assert.equal(slides.length, 3)
+        assert.equal(slides.length, 4)
         presentation.close(done)
       })
       it('should have the attribute "name"', function (done) {
@@ -117,14 +117,14 @@ describe('report', function () {
         var slides = presentation.slides()
         slides[1].remove()
         slides = presentation.slides()
-        assert.equal(slides.length, 2)
+        assert.equal(slides.length, 3)
         presentation.close(done)
       })
       it('should be able to duplicate slide1', function (done) {
         var presentation = new Presentation(path.join(testDataPath, testPPT01))
         assert.equal(presentation.slides()[0].duplicate().pos(), 2)
         var slides = presentation.slides()
-        assert.equal(slides.length, 4)
+        assert.equal(slides.length, 5)
         presentation.close(done)
       })
       it('should be able to create a shape on slide1', function (done) {
@@ -532,6 +532,25 @@ describe('report', function () {
         var shape = presentation.slides()[0].shapes()[0]
         var char = shape.character(2, 3)
         assert.equal(char.fontBold(true).fontBold(), true)
+        presentation.close(done)
+      })
+    })
+    describe('#tables', function () {
+      it('should have a table with 2 rows and 5 columns', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[3].shapes()[1]
+        assert.equal(shape.has('table'), true)
+        var table = shape.table()
+        assert.equal(table.length, 2)
+        assert.equal(table[0].length, 5)
+        presentation.close(done)
+      })
+      it('should have cell text and can change it', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var shape = presentation.slides()[3].shapes()[1]
+        var table = shape.table()
+        assert.equal(table[0][0].text(), 'A')
+        assert.equal(table[0][0].text('XX').text(), 'XX')
         presentation.close(done)
       })
     })
