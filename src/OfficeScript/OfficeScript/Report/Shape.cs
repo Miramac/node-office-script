@@ -264,6 +264,10 @@ namespace OfficeScript.Report
                     return (this.shape.HasDiagram == MsoTriState.msoTrue);
                 case "table":
                     return (this.shape.HasTable == MsoTriState.msoTrue);
+                case "img":
+                case "image":
+                case "picture":
+                    return (this.shape.Type == MsoShapeType.msoPicture);
                 case "text":
                 case "textframe":
                     return (this.shape.HasTextFrame == MsoTriState.msoTrue);
@@ -418,6 +422,7 @@ namespace OfficeScript.Report
                 this.shape.Top = (float)value;
             }
         }
+
         /// <summary>
         /// Get or Set the Left-Property for this element.
         /// </summary>
@@ -503,6 +508,20 @@ namespace OfficeScript.Report
             set
             {
                 this.shape.AlternativeText = value;
+            }
+        }
+
+        /// <summary>
+        /// Get or Set the Top-Property for this element.
+        /// </summary>
+        public string Type
+        {
+            get
+            {
+                return this.shape.Type.ToString();
+            }set
+            {
+                // do nothing :)
             }
         }
 
