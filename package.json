@@ -1,6 +1,6 @@
 {
   "name": "office-script",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Microsoft Office application automation.",
   "main": "index.js",
   "directories": {
