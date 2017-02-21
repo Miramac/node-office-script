@@ -446,7 +446,13 @@ namespace OfficeScript.Report
 
         private object GetActiveSlide()
         {
-            return new Slide(this.presentation.Application.ActiveWindow.Selection.SlideRange[1]).Invoke();
+            // Test if PowerPoint Presentation mode is currently running
+            if (this.presentation.Application.SlideShowWindows.Count > 0){ 
+                return new Slide(this.presentation.Application.SlideShowWindows[1].View.Slide).Invoke();
+            }
+            else {
+                return new Slide(this.presentation.Application.ActiveWindow.Selection.SlideRange[1]).Invoke();
+            }
         }
 
         /// <summary>
