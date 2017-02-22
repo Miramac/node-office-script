@@ -199,6 +199,7 @@ if (shapes[i].has('chart')) {
 ### Property methods
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
 ####.altText([value]) `String`
+####.title([value]) `String`
 ####.fill([value]) `String`
 ####.height([value]) `Float`
 ####.left([value]) `Float`
