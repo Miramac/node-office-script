@@ -443,16 +443,22 @@ namespace OfficeScript.Report
             return null;
         }
 
-
         private object GetActiveSlide()
         {
             // Test if PowerPoint Presentation mode is currently running
-            if (this.presentation.Application.SlideShowWindows.Count > 0){ 
+            if (IsInSlideShowMode()){ 
                 return new Slide(this.presentation.Application.SlideShowWindows[1].View.Slide).Invoke();
             }
             else {
                 return new Slide(this.presentation.Application.ActiveWindow.Selection.SlideRange[1]).Invoke();
             }
+        }
+
+        /// <summary>
+        /// Check if presentation in presentation mode
+        /// </summary>
+        private bool IsInSlideShowMode() {
+            return (this.presentation.Application.SlideShowWindows.Count > 0);
         }
 
         /// <summary>

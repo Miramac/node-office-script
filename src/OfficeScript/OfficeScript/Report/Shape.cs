@@ -512,6 +512,21 @@ namespace OfficeScript.Report
         }
 
         /// <summary>
+        /// Get or Set the Alt-Text for this element.
+        /// </summary>
+        public string Title
+        {
+            get
+            {
+                return this.shape.Title;
+            }
+            set
+            {
+                this.shape.Title = value;
+            }
+        }
+
+        /// <summary>
         /// Get or Set the Top-Property for this element.
         /// </summary>
         public string Type
