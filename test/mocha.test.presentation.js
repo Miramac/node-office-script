@@ -276,6 +276,16 @@ describe('report', function () {
         assert.equal(presentation.slides()[0].shapes()[0].rotation(10.5).rotation(), 10.5)
         presentation.close(done)
       })
+      it('should be able to change the attribute "altText"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        assert.equal(presentation.slides()[0].shapes()[0].altText('Fu Bar').altText(), 'Fu Bar')
+        presentation.close(done)
+      })
+      it('should be able to change the attribute "title"', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        assert.equal(presentation.slides()[0].shapes()[0].title('Fu Bar').title(), 'Fu Bar')
+        presentation.close(done)
+      })
 
       it('should be able to duplicate shape1', function (done) {
         var presentation = new Presentation(path.join(testDataPath, testPPT01))
