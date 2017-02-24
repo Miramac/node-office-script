@@ -98,54 +98,54 @@ ___
   
 ### Presentation methods
 
-####.addSlide([pos]) *returns slide object*
+#### .addSlide([pos]) *returns slide object*
 Adds a new empty slide on the provided postiton an returns it. If no postiton was provided, the new slide will be added at the end.
 ___
-####.close([callback]) 
+#### .close([callback]) 
 Closes the presentation without exiting powerpoint itself.
 ___
-####.quit([callback])
+#### .quit([callback])
 Closes the presentation and powerpoint itself.
 ___
-####.save([callback])
+#### .save([callback])
 Saves the presentation.
 ___
-####.saveAs(fullName [, callback])
+#### .saveAs(fullName [, callback])
 Saves the presentation to the provided path and name.
 ___
-####.saveAsCopy(fullName [, callback])
+#### .saveAsCopy(fullName [, callback])
 Saves the presentation as copy to the provided path and name.
 ___
-####.textReplace(find, replace)
+#### .textReplace(find, replace)
 Find and replace text in the entire presentation.
 ___
 
 
-### Property methods 
+### Property methods
 
-####.builtinProp([property, value]) `multifunctional` 
+#### .builtinProp([property, value]) `multifunctional` 
 Without parameters, returns all builtin properties with their vlaues.
 With `property`, returns value of the specific builtin property.
 With `property` and `value`, sets value of specific builtin property.
 ___
-####.customProp([property, value]) `multifunctional` 
+#### .customProp([property, value]) `multifunctional` 
 Without parameters, returns all custom properties with their vlaues.
 With `property`, returns value of the specific custom property.
 With `property` and `value`, sets/ccustomreates value of specific custom property
 ___
-####.fullName() `String readonly` Presentation path with presentation name
-####.name() `String readonly` Presentation name
-####.path() `String readonly` Presentation path
-####.slideHeight() `Number readonly` Slide/presentation height
-####.slideWidth() `Number readonly` Slide/presentation width
-####.type() `String readonly` Presentation type
+#### .fullName() `String readonly` Presentation path with presentation name
+#### .name() `String readonly` Presentation name
+#### .path() `String readonly` Presentation path
+#### .slideHeight() `Number readonly` Slide/presentation height
+#### .slideWidth() `Number readonly` Slide/presentation width
+#### .type() `String readonly` Presentation type
 
 ### Tag methods
-####.tags returns all tags
-####.tag *object with tag functions*
-####.tag.get(name) returns value of specific tag
-####.tag.set(name, value) set value of specific tag
-####.tag.remove(name) removes tag
+#### .tags returns all tags
+#### .tag *object with tag functions*
+#### .tag.get(name) returns value of specific tag
+#### .tag.set(name, value) set value of specific tag
+#### .tag.remove(name) removes tag
 
 ## presentation.slides([selector])
 Get presentation slides. Optional filterd by the selector.
@@ -155,24 +155,24 @@ Get active slide.
 Pastes the slides on the Clipboard into the Slides collection for the presentation. Returns the pasted slide. Index `-1` moves the slide to the end of the presentation.
 
 ### Slide methods
-####.addTextbox(options) *returns shape object*
-####.addPicture(options) *returns shape object*
-####.dublicate() *returns slide object*
-####.remove() *delete the slide*
-####.copy() *copy the slide to the Clipboard*
+#### .addTextbox(options) *returns shape object*
+#### .addPicture(options) *returns shape object*
+#### .dublicate() *returns slide object*
+#### .remove() *delete the slide*
+#### .copy() *copy the slide to the Clipboard*
 
 ### Property methods
 If `value` is provided, it will set the property and return the slide
-####.name([value]) `String` 
-####.number([value]) `Int readonly`
-####.pos([value]) `Int`
+#### .name([value]) `String` 
+#### .number([value]) `Int readonly`
+#### .pos([value]) `Int`
 
 ### Slide tag methods
-####.tags returns all tags
-####.tag *object with tag functions*
-####.tag.get(name) returns value of specific tag
-####.tag.set(name, value) set value of specific tag
-####.tag.remove(name) removes tag
+#### .tags returns all tags
+#### .tag *object with tag functions*
+#### .tag.get(name) returns value of specific tag
+#### .tag.set(name, value) set value of specific tag
+#### .tag.remove(name) removes tag
 
 ## presentation.shapes([selector] [, context])
 Get presentation shapes. Optional filterd by the selector. Context is an optional slides array.
@@ -182,13 +182,13 @@ Get selected shape.
 Get slide shapes. Optional filterd by the selector.
 
 ### Shape methods
-####.addline(text[, pos]) *returns paragraph object*
-####.dublicate() *returns shape object*
-####.exportAs(options) *returns shape object*
-####.remove() 
-####.shape.removeLine(pos) *returns paragraph object*
-####.textReplace(findString, replaceString) *returns shape object*
-####.zIndex([command]) *returns shape object*
+#### .addline(text[, pos]) *returns paragraph object*
+#### .dublicate() *returns shape object*
+#### .exportAs(options) *returns shape object*
+#### .remove()
+#### .shape.removeLine(pos) *returns paragraph object*
+#### .textReplace(findString, replaceString) *returns shape object*
+#### .zIndex([command]) *returns shape object*
 #### .has(name) *Check if the current shape has a table, chart or textframe*
 ```javascript
 // export chart-shapes as EMF
@@ -197,62 +197,65 @@ if (shapes[i].has('chart')) {
 }
 ```
 ### Property methods
+
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
-####.altText([value]) `String`
-####.title([value]) `String`
-####.fill([value]) `String`
-####.height([value]) `Float`
-####.left([value]) `Float`
-####.name([value]) `String`
-####.parent() *Not implemented yet*
-####.rotation([value]) `Float`
-####.table() `array` *Read-Only*
-####.text([value]) `String`
-####.top([value]) `Float`
-####.width([value]) `Float`
+
+#### .altText([value]) `String`
+#### .title([value]) `String`
+#### .fill([value]) `String`
+#### .height([value]) `Float`
+#### .left([value]) `Float`
+#### .name([value]) `String`
+#### .parent() *Not implemented yet*
+#### .rotation([value]) `Float`
+#### .table() `array` *Read-Only*
+#### .text([value]) `String`
+#### .top([value]) `Float`
+#### .width([value]) `Float`
 
 ### Shape tag methods
-####.tags returns all tags
-####.tag *object with tag functions*
-####.tag.get(name) returns value of specific tag
-####.tag.set(name, value) set value of specific tag
-####.tag.remove(name) removes tag
+#### .tags returns all tags
+#### .tag *object with tag functions*
+#### .tag.get(name) returns value of specific tag
+#### .tag.set(name, value) set value of specific tag
+#### .tag.remove(name) removes tag
 
 ## shape.paragraph(start, length)
 Get paragraph object. Optional filterd by start and length.
 
 ### Property methods
 If `value` is provided, it will set the property and return the shape. If not, it will return the value.
-####.text([value])
-####.count()
-####.fontName([value])
-####.fontSize([value])
-####.fontColor([value])
-####.fontItalic([value])
-####.fontBold([value])
-####.align([value])
-####.indent([value])
-####.bulletCharacter([value])
-####.bulletFontName([value])
-####.bulletFontBold([value])
-####.bulletFontSize([value])
-####.bulletFontColor([value])
-####.bulletVisible([value])
-####.bulletRelativeSize([value])
-####.firstLineIndent([value])
-####.leftIndent([value])
-####.lineRuleBefore([value])
-####.lineRuleAfter([value])
-####.hangingPunctuation([value])
-####.spaceBefore([value])
-####.spaceAfter([value])
-####.spaceWithin([value])
+#### .text([value])
+#### .count()
+#### .fontName([value])
+#### .fontSize([value])
+#### .fontColor([value])
+#### .fontItalic([value])
+#### .fontBold([value])
+#### .align([value])
+#### .indent([value])
+#### .bulletCharacter([value])
+#### .bulletFontName([value])
+#### .bulletFontBold([value])
+#### .bulletFontSize([value])
+#### .bulletFontColor([value])
+#### .bulletVisible([value])
+#### .bulletRelativeSize([value])
+#### .firstLineIndent([value])
+#### .leftIndent([value])
+#### .lineRuleBefore([value])
+#### .lineRuleAfter([value])
+#### .hangingPunctuation([value])
+#### .spaceBefore([value])
+#### .spaceAfter([value])
+#### .spaceWithin([value])
 
 ### Paragraph methods
-####.copyFont(srcParagraph)
-####.copyFormat(srcParagraph)
-####.copyStyle(srcParagraph)
-####.remove()
+#### .copyFont(srcParagraph)
+#### .copyFormat(srcParagraph)
+#### .copyStyle(srcParagraph)
+#### .remove()
+Delete paragraph
 
 
  
