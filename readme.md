@@ -157,7 +157,7 @@ Pastes the slides on the Clipboard into the Slides collection for the presentati
 ### Slide methods
 #### .addTextbox(options) *returns shape object*
 #### .addPicture(options) *returns shape object*
-#### .dublicate() *returns slide object*
+#### .duplicate() *returns slide object*
 #### .remove() *delete the slide*
 #### .copy() *copy the slide to the Clipboard*
 
@@ -183,7 +183,7 @@ Get slide shapes. Optional filterd by the selector.
 
 ### Shape methods
 #### .addline(text[, pos]) *returns paragraph object*
-#### .dublicate() *returns shape object*
+#### .duplicate() *returns shape object*
 #### .exportAs(options) *returns shape object*
 #### .remove()
 #### .shape.removeLine(pos) *returns paragraph object*
