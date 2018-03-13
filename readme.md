@@ -159,7 +159,11 @@ Pastes the slides on the Clipboard into the Slides collection for the presentati
 #### .addPicture(options) *returns shape object*
 #### .duplicate() *returns slide object*
 #### .remove() *delete the slide*
-#### .copy() *copy the slide to the Clipboard*
+#### .copy() *copy the slide to the Clipboard* (to paste the slide in an other presentation)
+```javascript
+presentation01.slides()[0].copy() // Copy first slide from presentation presentation01
+presentation02.pasteSlide() // Paste it on the end in presentation presentation02
+```
 
 ### Property methods
 If `value` is provided, it will set the property and return the slide
