@@ -1,6 +1,6 @@
 {
   "name": "office-script",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Microsoft Office application automation.",
   "main": "index.js",
   "directories": {
@@ -31,8 +31,8 @@
   ],
   "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {
-    "edge-js": "^9.3.2",
-    "lodash": "^4.17.4"
+    "edge-js": "^9.3.7",
+    "lodash": "^4.17.10"
   },
   "devDependencies": {
     "del": "^2.2.2",
