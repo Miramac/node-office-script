@@ -31,12 +31,12 @@
   ],
   "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {
-    "edge-js": "^9.3.7",
+    "edge-js": "^11.3.0",
     "lodash": "^4.17.11"
   },
   "devDependencies": {
-    "del": "^2.2.2",
+    "del": "^4.0.0",
     "gulp": "^4.0.0",
-    "mocha": "^5.2.0"
+    "mocha": "^6.0.2"
   }
 }
