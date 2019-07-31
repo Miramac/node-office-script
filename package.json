@@ -32,7 +32,7 @@
   "homepage": "https://github.com/Miramac/node-office-script",
   "dependencies": {
     "edge-js": "^11.3.0",
-    "lodash": "^4.17.11"
+    "lodash": "^4.17.13"
   },
   "devDependencies": {
     "del": "^4.0.0",
