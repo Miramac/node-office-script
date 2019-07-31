@@ -96,6 +96,12 @@ namespace OfficeScript.Report
                         this.TextReplace((input as IDictionary<string, object>).ToDictionary(d => d.Key, d => d.Value));
                         return this.Invoke();
                     }),
+                pasteShape = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+
+                        return this.PasteShape();
+                    }),
                 dispose = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -155,7 +161,16 @@ namespace OfficeScript.Report
         {
             this.slide.Copy();
         }
-        
+
+
+        /// <summary>
+        /// Paste Shape in Slide
+        /// </summary>
+        private object PasteShape()
+        {
+            return new Shape(this.slide.Shapes.Paste()[1]).Invoke();
+        }
+
         /// <summary>
         /// Not yet Implemented!
         /// </summary>
@@ -331,7 +346,7 @@ namespace OfficeScript.Report
             return false;
         }
 
-/// <summary>
+        /// <summary>
         /// Find and replace in presentation
         /// </summary>
         /// <param name="parameters"></param>
