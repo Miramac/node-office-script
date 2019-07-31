@@ -56,6 +56,12 @@ namespace OfficeScript.Report
                     {
                         return this.Duplicate();
                     }),
+                copy = (Func<object, Task<object>>)(
+                    async (input) =>
+                    {
+                        this.Copy();
+                        return null;
+                    }),
                 paragraph = (Func<object, Task<object>>)(
                     async (input) =>
                     {
@@ -125,7 +131,16 @@ namespace OfficeScript.Report
         {
              return new Shape(this.shape.Duplicate()[1]).Invoke();
         }
-        
+
+        /// <summary>
+        /// Copy this Shape
+        /// </summary>
+        /// <returns>Shape</returns>
+        private void Copy()
+        {
+            this.shape.Copy();
+        }
+
         /// <summary>
         /// Deletes the Shape
         /// </summary>
