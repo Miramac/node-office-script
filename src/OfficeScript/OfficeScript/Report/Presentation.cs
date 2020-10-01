@@ -267,6 +267,9 @@ namespace OfficeScript.Report
                 case "ppt":
                     pptFileType = PowerPoint.Enums.PpSaveAsFileType.ppSaveAsPresentation;
                     break;
+                case "png":
+                    pptFileType = PowerPoint.Enums.PpSaveAsFileType.ppSaveAsPNG;
+                    break;
                 default:
                     pptFileType = PowerPoint.Enums.PpSaveAsFileType.ppSaveAsOpenXMLPresentation;
                     break;
