@@ -170,6 +170,7 @@ If `value` is provided, it will set the property and return the slide
 #### .name([value]) `String` 
 #### .number([value]) `Int readonly`
 #### .pos([value]) `Int`
+#### .notes() `String`
 
 ### Slide tag methods
 #### .tags returns all tags
