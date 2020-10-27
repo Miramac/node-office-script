@@ -209,6 +209,12 @@ describe('report', function () {
         assert.equal(presentation.slides().length, slideCount + 1)
         presentation.close(done)
       })
+      it('should be able read slide notes', function (done) {
+        var presentation = new Presentation(path.join(testDataPath, testPPT01))
+        var slideNotes = presentation.slides()[1].notes()
+        assert.equal(slideNotes, 'Slide 1\rNotes')
+        presentation.close(done)
+      })
     })
     describe('#shapes', function () {
       it('should have 2 shapes on slide one', function (done) {
