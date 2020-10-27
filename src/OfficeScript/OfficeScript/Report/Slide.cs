@@ -463,7 +463,11 @@ namespace OfficeScript.Report
                 }
             }
         }
-
+        /// <summary>
+        /// Return all slide notes
+        /// </summary>
+        /// <param name="slide"></param>
+        /// <returns></returns>
         // https://stackoverflow.com/a/20640637
         private string GetNotes(PowerPoint.Slide slide)
         {
