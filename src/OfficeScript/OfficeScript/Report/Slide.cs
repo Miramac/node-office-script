@@ -463,7 +463,47 @@ namespace OfficeScript.Report
                 }
             }
         }
+        /// <summary>
+        /// Return all slide notes
+        /// </summary>
+        /// <param name="slide"></param>
+        /// <returns></returns>
+        // https://stackoverflow.com/a/20640637
+        private string GetNotes(PowerPoint.Slide slide)
+        {
+            if (slide.HasNotesPage == MsoTriState.msoFalse)
+                return string.Empty;
 
+            string slideNodes = string.Empty;
+            var notesPage = slide.NotesPage;
+            int length = 0;
+            foreach (PowerPoint.Shape shape in notesPage.Shapes)
+            {
+                if (shape.Type == MsoShapeType.msoPlaceholder)
+                {
+                    var tf = shape.TextFrame;
+                    try
+                    {
+                        //Some TextFrames do not have a range
+                        var range = tf.TextRange;
+                        if (range.Length > length)
+                        {   //Some have a digit in the text, 
+                            //so find the longest text item and return that
+                            slideNodes = range.Text;
+                            length = range.Length;
+                        }
+                    }
+                    catch (Exception)
+                    { }
+                }
+            }
+            return slideNodes;
+        }
+
+        private void SetNotes(PowerPoint.Slide slide, string text)
+        {
+            throw new NotImplementedException();
+        }
         /// <summary>
         /// 
         /// </summary>
@@ -503,6 +543,14 @@ namespace OfficeScript.Report
             set
             {
                 this.slide.Name = value;
+            }
+        }
+
+        public string Notes
+        {
+            get
+            {
+                return this.GetNotes(this.slide);
             }
         }
 
